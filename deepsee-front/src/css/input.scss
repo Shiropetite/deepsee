@@ -1,0 +1,27 @@
+input:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+input,
+textarea,
+.select-input {
+    border: 1px solid #8796B6;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 16px;
+    padding: 8px 12px;
+    resize: none;
+    transition: border-color 0.2s;
+    width: calc(100% - 20px);
+    font-size: 14px;
+}
+
+::placeholder {
+    color: #8796B6;
+    opacity: 1;
+}
+
+::-ms-input-placeholder {
+    color: #8796B6;
+}
