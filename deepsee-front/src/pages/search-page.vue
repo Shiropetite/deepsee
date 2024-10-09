@@ -1,25 +1,37 @@
 <script lang="ts" setup>
 import { onMounted, Ref, ref } from 'vue';
 
-import { getAllJobOffers } from '../services/job-offers';
+import { getJobOffersByFilters, SearchJobOffersFilter, JobOffersByFilters } from '../services/job-offers-service';
+import { formatTimeElapsedSince } from '../utils/time-utils';
 
 const contractTypesOptions = [
     {
         label: 'Tous les contrats',
         value: '',
     },
-    { label: 'CDD', value: 'FIXED_TERM' },
-    { label: 'CDI', value: 'PERMANENT' },
-    { label: 'Alternance', value: 'APPRENTICESHIP' },
-    { label: 'Stage', value: 'INTERNSHIP' },
-    { label: 'Freelance', value: 'FREELANCE' },
+    { label: 'CDD', value: 'CDD' },
+    { label: 'CDI', value: 'CDI' },
+    { label: 'Alternance', value: 'Alternance' },
+    { label: 'Stage', value: 'Stage' },
+    { label: 'Freelance', value: 'Freelance' },
+    { label: 'Intérim', value: 'Intérim' },
 ];
 
-const contract = ref('');
-const jobOffers: Ref<any[]> = ref([]);
+const searchFilters: Ref<SearchJobOffersFilter> = ref({
+    city: '',
+    companyName: '',
+    contract: '',
+    jobTitle: '',
+});
+
+const jobOffers: Ref<JobOffersByFilters> = ref([]);
+
+const searchJobOffers = async () => {
+    jobOffers.value = await getJobOffersByFilters({ searchFilters: searchFilters.value });
+};
 
 onMounted(async () => {
-    jobOffers.value = await getAllJobOffers();
+    await searchJobOffers();
 });
 
 </script>
@@ -29,34 +41,27 @@ onMounted(async () => {
         <div class="search row gap-18">
             <div class="column gap-12 width-100">
                 <input
+                    v-model="searchFilters.jobTitle"
                     placeholder="Rechercher une offre d'emploi"
                     type="text"
                 >
 
                 <div class="row gap-12">
                     <select-input
-                        v-model="contract"
+                        v-model="searchFilters.contract"
                         :options="contractTypesOptions"
                         style="min-width: 180px;"
                     />
 
                     <input
+                        v-model="searchFilters.city"
                         placeholder="Ville"
                         type="text"
                     >
 
                     <input
+                        v-model="searchFilters.companyName"
                         placeholder="Entreprise"
-                        type="text"
-                    >
-
-                    <input
-                        placeholder="Date de début"
-                        type="text"
-                    >
-
-                    <input
-                        placeholder="Secteur"
                         type="text"
                     >
                 </div>
@@ -67,6 +72,7 @@ onMounted(async () => {
                     :height="32"
                     :width="32"
                     color="white"
+                    @click="searchJobOffers"
                 />
             </button>
         </div>
@@ -94,7 +100,7 @@ onMounted(async () => {
                         </div>
 
                         <div class="caption">
-                            {{ jobOffer.date }}
+                            {{ formatTimeElapsedSince(jobOffer.publishedAt) }}
                         </div>
                     </div>
 
@@ -104,7 +110,7 @@ onMounted(async () => {
                                 {{ jobOffer.contract }}
                             </div>
                             <div class="chip accent-2">
-                                {{ jobOffer.location }}
+                                {{ jobOffer.city }}
                             </div>
                             <div class="chip accent-3">
                                 {{ jobOffer.salary }}
