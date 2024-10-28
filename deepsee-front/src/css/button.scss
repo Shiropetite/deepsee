@@ -1,20 +1,34 @@
 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 30px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    height: 100%;
-    padding: 8px 12px;
+    padding: 12px 18px;
     transition: background-color 0.2s;
     width: fit-content;
+    font-size: 14px;
 }
 
 button:hover {
-    background-color: #eff4f9;
+    background-color: #d0dcea;
 }
 
+button.active {
+    font-weight: 700;
+    background-color: #D0FBFF;
+    color: #0098b6;
+}
+
+button.active:hover {
+    background-color: #D0FBFF;
+}
+
+// Background primary
 button.primary {
     border: 2px solid #00b2ca;
     background-color: #00b2ca;
@@ -25,14 +39,25 @@ button.primary:hover {
     background-color: #0098b6;
 }
 
+button.primary.border {
+    border: 2px solid #00b2ca;
+    background-color: white;
+    color: #00b2ca;
+}
+
+button.primary.border:hover {
+    background-color: #eff4f9;
+}
+
+// Background secondary
 button.secondary {
-    border: 2px solid #1B4965;
-    background-color: #1B4965;
+    border: 2px solid #0b2d71;
+    background-color: #0b2d71;
     color: white;
 }
 
 button.secondary:hover {
-    background-color: #13364d;
+    background-color: rgb(10, 30, 70);
 }
 
 button.round {
@@ -41,4 +66,26 @@ button.round {
     justify-content: center;
     border-radius: 30px;
     padding: 8px;
+}
+
+
+button.rounded {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    padding: 8px 12px;
+}
+
+button.label-icon {
+    padding: 8px 18px 8px 12px;
+}
+
+button.bubble {
+    border-radius: 8px 100px 100px 100px;
+}
+
+button.small {
+    padding: 8px 12px;
+    font-size: 12px;
 }

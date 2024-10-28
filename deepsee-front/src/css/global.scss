@@ -1,7 +1,10 @@
 @import './button.scss';
+@import './chip.scss';
 @import './flexbox.scss';
 @import './font.scss';
 @import './input.scss';
+@import './spacing.scss';
+@import './variables.scss';
 
 body {
   margin: 0;
@@ -20,6 +23,11 @@ body {
   height: 100vh;
 }
 
-.mb-2 {
-  margin-bottom: 2px;
+.separator {
+  background-color: #CCDBEC;
+  height: 8px;
+}
+
+.bubble {
+  border-radius: 4px 32px 32px 32px;
 }
