@@ -51,13 +51,13 @@ button.primary.border:hover {
 
 // Background secondary
 button.secondary {
-    border: 2px solid #0b2d71;
-    background-color: #0b2d71;
+    border: 2px solid #091C42;
+    background-color: #091C42;
     color: white;
 }
 
 button.secondary:hover {
-    background-color: rgb(10, 30, 70);
+    background-color: #061432;
 }
 
 button.round {
@@ -88,4 +88,15 @@ button.bubble {
 button.small {
     padding: 8px 12px;
     font-size: 12px;
+}
+
+@media (max-width: 900px) {
+    button {
+        font-size: 12px !important;
+    }
+
+    button img {
+        width: 20px;
+        height: 20px;
+    }
 }

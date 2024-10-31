@@ -57,120 +57,143 @@ watch(() => route.fullPath, async () => {
 </script>
 
 <template>
-    <sea-shape-component
-        class="sea"
-        fill-image="/sea-background.png"
-        :height="'580px'"
-    />
+    <div class="sea">
+        <sea-shape-component
+            fill-image="/sea-background.png"
+            laptop-height="120px"
+            mobile-height="40px"
+        />
+    </div>
 
     <div class="row justify-center">
-        <div class="detail-container row">
+        <div class="detail-container row gap-28">
             <div class="list">
-                <button
-                    class="primary label-icon round mb-18 row gap-8"
-                    @click="goToSearch"
-                >
-                    <img src="/icons/arrow-left-icon.png">
-                    <div>Retour</div>
-                </button>
+                <div class="list-header">
+                    <button
+                        class="primary label-icon round row gap-8"
+                        @click="goToSearch"
+                    >
+                        <img src="/icons/arrow-left-icon.png">
+                        <div>Retour</div>
+                    </button>
+                </div>
 
-                <h2 class="mb-18">
-                    Aujourd'hui
-                </h2>
+                <div class="list-body">
+                    <h2 class="mb-18">
+                        Aujourd'hui
+                    </h2>
 
-                <div class="column gap-28">
-                    <job-card
-                        v-for="job in jobOffers"
-                        :key="job.__id"
-                        :class="{ active: job.__id === jobOffer.__id }"
-                        :job="job"
-                        @click="goToJobOffer(job.__id)"
-                    />
+                    <div class="column gap-28">
+                        <job-card
+                            v-for="job in jobOffers"
+                            :key="job.__id"
+                            :class="{ active: job.__id === jobOffer?.__id }"
+                            :job="job"
+                            @click="goToJobOffer(job.__id)"
+                        />
+                    </div>
                 </div>
             </div>
 
             <div
                 v-if="jobOffer"
-                class="detail column gap-28"
+                class="detail"
             >
-                <div>
-                    <div class="row justify-between">
-                        <div class="row gap-28 align-center">
-                            <img
-                                class="logo"
-                                :src="jobOffer.companyLogo"
+                <div class="detail-header-container">
+                    <div class="detail-header">
+                        <div class="row justify-between align-center gap-8 mb-12">
+                            <button
+                                class="primary icon round row gap-8 mobile"
+                                @click="goToSearch"
                             >
+                                <img src="/icons/arrow-left-icon.png">
+                            </button>
 
-                            <div>
-                                <h2 class="mb-2">
-                                    {{ jobOffer.title }}
-                                </h2>
-
-                                <div>
-                                    {{ jobOffer.companyName }}
-                                </div>
+                            <div class="mobile">
+                                {{ formatTimeElapsedSince(jobOffer.publishedAt) }}
                             </div>
                         </div>
 
-                        <div>{{ formatTimeElapsedSince(jobOffer.publishedAt) }}</div>
-                    </div>
+                        <div class="row justify-between mb-18">
+                            <div class="row gap-28 align-center">
+                                <img
+                                    class="logo"
+                                    :src="jobOffer.companyLogo"
+                                >
 
-                    <div class="row justify-end gap-8 mb-18">
-                        <button class="primary round label-icon row gap-8">
-                            <img src="/icons/send-icon.png">
-                            <div>Postuler</div>
-                        </button>
+                                <div>
+                                    <h2 class="mb-2">
+                                        {{ jobOffer.title }}
+                                    </h2>
 
-                        <button class="secondary round label-icon row gap-8">
-                            <img src="/icons/favorite-icon.png">
-                            <div>Favoris</div>
-                        </button>
-                    </div>
+                                    <div>
+                                        {{ jobOffer.companyName }}
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="title mb-6">
-                        Résumé
-                    </div>
-
-                    <div class="row wrap gap-8">
-                        <div class="chip border grey">
-                            {{ jobOffer.contract }}
+                            <div class="laptop">{{ formatTimeElapsedSince(jobOffer.publishedAt) }}</div>
                         </div>
 
-                        <div class="chip border grey">
-                            {{ jobOffer.city }}
-                        </div>
+                        <div class="row justify-end gap-8">
+                            <button class="primary round label-icon row gap-8">
+                                <img src="/icons/send-icon.png">
+                                <div>Postuler</div>
+                            </button>
 
-                        <div class="chip border grey">
-                            {{ formatSalary(jobOffer) }}
-                        </div>
-
-                        <div class="chip border grey">
-                            {{ jobOffer.dayOfRemoteWork }} jours de télétravail / semaine
-                        </div>
-
-                        <div class="chip border grey">
-                            {{ jobOffer.experienceMinInYear }} an d'expérience
-                        </div>
-
-                        <div class="chip border grey">
-                            {{ jobOffer.maxDiploma }}
+                            <button class="secondary round label-icon row gap-8">
+                                <img src="/icons/favorite-icon.png">
+                                <div>Favoris</div>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <div class="title mb-8">
-                        Description de l'entreprise
+                <div class="detail-body column gap-28">
+                    <div>
+                        <div class="title mb-6">
+                            Résumé
+                        </div>
+
+                        <div class="row wrap gap-8">
+                            <div class="chip border grey">
+                                {{ jobOffer.contract }}
+                            </div>
+
+                            <div class="chip border grey">
+                                {{ jobOffer.city }}
+                            </div>
+
+                            <div class="chip border grey">
+                                {{ formatSalary(jobOffer) }}
+                            </div>
+
+                            <div class="chip border grey">
+                                {{ jobOffer.dayOfRemoteWork }} jours de télétravail / semaine
+                            </div>
+
+                            <div class="chip border grey">
+                                {{ jobOffer.experienceMinInYear }} an d'expérience
+                            </div>
+
+                            <div class="chip border grey">
+                                {{ jobOffer.maxDiploma }}
+                            </div>
+                        </div>
                     </div>
 
-                    <div
-                        class="description mb-12"
-                        :class="{ 'all': companyDescriptionSeeMore }"
-                    >
-                        {{ jobOffer.companyDescription }}
-                    </div>
+                    <div>
+                        <div class="title mb-8">
+                            Description de l'entreprise
+                        </div>
 
-                    <div class="row justify-between align-start">
+                        <div
+                            class="description mb-12"
+                            :class="{ 'all': companyDescriptionSeeMore }"
+                        >
+                            {{ jobOffer.companyDescription }}
+                        </div>
+
                         <div class="row wrap gap-8 mb-12">
                             <div class="chip border grey">
                                 {{ jobOffer.companySector }}
@@ -181,169 +204,171 @@ watch(() => route.fullPath, async () => {
                             </div>
                         </div>
 
-                        <button
-                            v-if="!companyDescriptionSeeMore"
-                            class="secondary small"
-                            @click="companyDescriptionSeeMore = true"
-                        >
-                            Voir plus
-                        </button>
+                        <div class="row justify-end">
+                            <button
+                                v-if="!companyDescriptionSeeMore"
+                                class="secondary small"
+                                @click="companyDescriptionSeeMore = true"
+                            >
+                                Voir plus
+                            </button>
 
-                        <button
-                            v-if="companyDescriptionSeeMore"
-                            class="secondary small"
-                            @click="companyDescriptionSeeMore = false"
-                        >
-                            Rétrécir
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="title mb-8">
-                        Description de l'offre
-                    </div>
-
-                    <div
-                        class="description mb-8"
-                        :class="{ 'all': jobDescriptionSeeMore }"
-                    >
-                        {{ jobOffer.jobDescription }}
-                    </div>
-
-                    <div class="row justify-end">
-                        <button
-                            v-if="!jobDescriptionSeeMore"
-                            class="secondary small"
-                            @click="jobDescriptionSeeMore = true"
-                        >
-                            Voir plus
-                        </button>
-
-                        <button
-                            v-if="jobDescriptionSeeMore"
-                            class="secondary small"
-                            @click="jobDescriptionSeeMore = false"
-                        >
-                            Rétrécir
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="title mb-6">
-                        Compétences
-                    </div>
-
-                    <div class="row gap-8">
-                        <div
-                            v-for="skill in jobOffer.hardSkills"
-                            :key="skill"
-                            class="chip border grey"
-                        >
-                            {{ skill }}
+                            <button
+                                v-if="companyDescriptionSeeMore"
+                                class="secondary small"
+                                @click="companyDescriptionSeeMore = false"
+                            >
+                                Voir moins
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <div class="title mb-8">
-                        Description des attentes
-                    </div>
+                    <div>
+                        <div class="title mb-8">
+                            Description de l'offre
+                        </div>
 
-                    <div
-                        class="description mb-8"
-                        :class="{ 'all': expectationDescriptionSeeMore }"
-                    >
-                        {{ jobOffer.expectationDescription }}
-                    </div>
-
-                    <div class="row justify-end">
-                        <button
-                            v-if="!expectationDescriptionSeeMore"
-                            class="secondary small"
-                            @click="expectationDescriptionSeeMore = true"
-                        >
-                            Voir plus
-                        </button>
-
-                        <button
-                            v-if="expectationDescriptionSeeMore"
-                            class="secondary small"
-                            @click="expectationDescriptionSeeMore = false"
-                        >
-                            Rétrécir
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="title mb-6">
-                        Traits recherchés
-                    </div>
-
-                    <div class="row gap-8">
                         <div
-                            v-for="skill in jobOffer.softSkills"
-                            :key="skill"
-                            class="chip border grey"
+                            class="description mb-8"
+                            :class="{ 'all': jobDescriptionSeeMore }"
                         >
-                            {{ skill }}
+                            {{ jobOffer.jobDescription }}
+                        </div>
+
+                        <div class="row justify-end">
+                            <button
+                                v-if="!jobDescriptionSeeMore"
+                                class="secondary small"
+                                @click="jobDescriptionSeeMore = true"
+                            >
+                                Voir plus
+                            </button>
+
+                            <button
+                                v-if="jobDescriptionSeeMore"
+                                class="secondary small"
+                                @click="jobDescriptionSeeMore = false"
+                            >
+                                Voir moins
+                            </button>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <div class="title mb-8">
-                        Etapes de recrutement
-                    </div>
+                    <div>
+                        <div class="title mb-6">
+                            Compétences
+                        </div>
 
-                    <div class="column gap-8">
-                        <div
-                            v-for="step in jobOffer.recruitmentSteps"
-                            :key="step.name"
-                        >
-                            - {{ step.name }} - {{ step.timeInMinute }}min
+                        <div class="row wrap gap-8">
+                            <div
+                                v-for="skill in jobOffer.hardSkills"
+                                :key="skill"
+                                class="chip border grey"
+                            >
+                                {{ skill }}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <div class="title mb-8">
-                        Descriptif de l’équipe
+                    <div>
+                        <div class="title mb-8">
+                            Description des attentes
+                        </div>
+
+                        <div
+                            class="description mb-8"
+                            :class="{ 'all': expectationDescriptionSeeMore }"
+                        >
+                            {{ jobOffer.expectationDescription }}
+                        </div>
+
+                        <div class="row justify-end">
+                            <button
+                                v-if="!expectationDescriptionSeeMore"
+                                class="secondary small"
+                                @click="expectationDescriptionSeeMore = true"
+                            >
+                                Voir plus
+                            </button>
+
+                            <button
+                                v-if="expectationDescriptionSeeMore"
+                                class="secondary small"
+                                @click="expectationDescriptionSeeMore = false"
+                            >
+                                Voir moins
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="row wrap gap-8">
-                        <div
-                            v-for="member in jobOffer.teamMembers"
-                            :key="member.name"
-                            class="team row align-center gap-8"
-                        >
-                            <div class="avatar" />
-                            <div>
-                                <div class="bold mb-2">
-                                    {{ member.firstName }} {{ member.lastName }}
-                                </div>
-                                <div class="caption">
-                                    {{ member.role }}
+                    <div>
+                        <div class="title mb-6">
+                            Traits recherchés
+                        </div>
+
+                        <div class="row wrap gap-8">
+                            <div
+                                v-for="skill in jobOffer.softSkills"
+                                :key="skill"
+                                class="chip border grey"
+                            >
+                                {{ skill }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="title mb-8">
+                            Etapes de recrutement
+                        </div>
+
+                        <div class="column gap-8">
+                            <div
+                                v-for="step in jobOffer.recruitmentSteps"
+                                :key="step.name"
+                            >
+                                - {{ step.name }} - {{ step.timeInMinute }}min
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="title mb-8">
+                            Descriptif de l’équipe
+                        </div>
+
+                        <div class="row wrap gap-8">
+                            <div
+                                v-for="member in jobOffer.teamMembers"
+                                :key="member.name"
+                                class="team row align-center gap-8"
+                            >
+                                <div class="avatar" />
+                                <div>
+                                    <div class="bold mb-2">
+                                        {{ member.firstName }} {{ member.lastName }}
+                                    </div>
+                                    <div class="caption">
+                                        {{ member.role }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <div class="title mb-8">
-                        Avantages entreprise
-                    </div>
+                    <div>
+                        <div class="title mb-8">
+                            Avantages entreprise
+                        </div>
 
-                    <div class="row wrap gap-8">
-                        <div
-                            v-for="advantage in jobOffer.companyAdvantages"
-                            :key="advantage"
-                            class="chip border grey"
-                        >
-                            {{ advantage }}
+                        <div class="row wrap gap-8">
+                            <div
+                                v-for="advantage in jobOffer.companyAdvantages"
+                                :key="advantage"
+                                class="chip border grey"
+                            >
+                                {{ advantage }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -353,6 +378,52 @@ watch(() => route.fullPath, async () => {
 </template>
 
 <style lang="scss" scoped>
+@media (max-width: 900px) {
+    .list {
+        display: none;
+    }
+
+    .detail-header-container {
+        padding-top: 56px !important;
+    }
+
+    .detail-header {
+        padding: 18px !important;
+    }
+
+    .detail-container {
+        margin: 0 28px 28px 28px !important;
+    }
+
+    .detail-body {
+        padding: 18px !important;
+    }
+
+    .mobile {
+        display: flex !important;
+    }
+
+    .team {
+        flex: 1 1 100% !important;
+    }
+
+    .laptop {
+        display: none !important;
+    }
+}
+
+.mobile {
+    display: none;
+}
+
+.sea {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 10;
+}
+
 .logo {
     border: solid 1px #BECCEB;
     width: 78px;
@@ -362,30 +433,60 @@ watch(() => route.fullPath, async () => {
 }
 
 .detail-container {
-    height: calc(100vh - 120px);
     max-width: 1200px;
     width: 100%;
-    margin: 118px 80px 0 80px;
-    background-color: white;
-    border-radius: 8px;
-    border: solid 1px #BECCEB;
+    margin: 0 80px 28px 80px;
 }
 
 .list {
-    overflow-y: auto;
+    min-width: 340px;
+}
+
+.list-header {
     padding: 28px;
+    background-color: white;
+    top: 160px;
+    position: sticky;
+    border: solid 1px #BECCEB;
+    border-radius: 8px 8px 0 0;
+    z-index: 10;
+}
+
+.list-body {
+    top: 260px;
+    position: sticky;
+    overflow-y: scroll;
+    padding: 28px;
+    border: solid 1px #BECCEB;
+    background-color: white;
+    max-height: calc(100vh - 360px);
 }
 
 .detail {
-    overflow-y: auto;
     width: 100%;
-    padding: 28px;
-    border-left: solid 1px #BECCEB;
 }
 
-.sea {
-    position: fixed;
-    z-index: -1;
+.detail-header-container {
+    padding-top: 160px;
+    background-color: white;
+    top: 0px;
+    position: sticky;
+    transition: padding 0.2s
+}
+
+.detail-header {
+    border-radius: 8px 8px 0 0;
+    padding: 28px;
+    border: solid 1px #BECCEB;
+    background-color: white;
+    z-index: 10;
+}
+
+.detail-body {
+    border-radius: 0 0 8px 8px ;
+    border: solid 1px #BECCEB;
+    padding: 28px;
+    background-color: white;
 }
 
 .description {

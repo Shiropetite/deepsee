@@ -28,7 +28,8 @@ CREATE TABLE "job_recruitment_step" (
 CREATE TABLE "job_team_member" (
     job_offer_id INTEGER REFERENCES job_offer(id),
     first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL
+    last_name VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
 );
 
 ALTER TABLE "company" 

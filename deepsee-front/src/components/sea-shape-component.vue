@@ -2,14 +2,16 @@
 defineProps<{
     fillColor?: string;
     fillImage?: string;
-    height?: string;
+    laptopHeight?: string;
+    mobileHeight?: string;
 }>();
 </script>
 
 <template>
     <svg
+        class="sea-laptop"
         :width="'100%'"
-        :height="height"
+        :height="laptopHeight ?? '500px'"
         viewBox="0 0 1920 500"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
@@ -39,4 +41,35 @@ defineProps<{
             :fill="fillImage ? 'url(#imageFill)' : fillColor"
         />
     </svg>
+
+    <svg
+        class="sea-mobile"
+        :width="'100%'"
+        :height="mobileHeight ?? '128px'"
+        viewBox="0 0 412 142"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+    >
+        <path
+            d="M0 0H412V119.846V119.846C276.209 148.952 135.791 148.952 0 119.846V119.846V0Z"
+            fill="#091C42"
+        />
+    </svg>
 </template>
+
+<style lang="scss" scoped>
+@media (max-width: 900px) {
+    .sea-laptop {
+        display: none !important;
+    }
+
+    .sea-mobile {
+        display: block !important;
+    }
+}
+
+.sea-mobile {
+    display: none;
+}
+</style>
