@@ -1,15 +1,21 @@
 <script lang="ts" setup>
-import { formatSalary } from '../utils/salary-utils';
+import { formatSalary } from 'src/utils/salary-utils';
+
+type JobInfo = {
+    city: string;
+    companyLogo: string;
+    companyName: string;
+    contract: string;
+    title: string;
+}
 
 defineProps<{
-    job: any;
+    job: JobInfo;
 }>();
 </script>
 
 <template>
-    <div
-        class="card bubble"
-    >
+    <div class="card bubble">
         <div class="row align-center gap-18 mb-18">
             <img
                 class="logo"
@@ -41,20 +47,20 @@ defineProps<{
 
 <style lang="scss">
 .card {
-  border: solid 3px #BECCEB;
-  padding: 18px;
-  cursor: pointer;
-  transition: all linear 0.2s;
+    border: solid 3px var(--light-grey);
+    cursor: pointer;
+    padding: 18px;
+    transition: all linear 0.2s;
 }
 
 .card .logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 100px;
-  border: solid 1px #BECCEB;
+    border: solid 1px var(--light-grey);
+    border-radius: 100px;
+    height: 64px;
+    width: 64px;
 }
 
 .card.active {
-    border: solid 4px #00b2ca;
+    border: solid 4px var(--primary);
 }
 </style>

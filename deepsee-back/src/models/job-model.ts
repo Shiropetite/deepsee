@@ -1,4 +1,5 @@
-export type JobOffer = {
+// #region --- Models
+export type Job = {
     __id: number;
     _companyId: number;
     city: string;
@@ -6,24 +7,32 @@ export type JobOffer = {
     dayOfRemoteWork: number;
     expectationDescription: string;
     experienceMinInYear: number;
-    hardSkills: string[];
+    hardSkills?: string[];
     jobDescription: string;
     maxDiploma: string;
     publishedAt: string;
-    recruitmentSteps: string[];
+    recruitmentSteps?: JobRecruitmentStep[];
     salaryMaxInYear: number;
     salaryMinInYear: number;
-    softSkills: string[];
-    teamMembers: {
-        firstName: string;
-        lastName: string;
-        logo?: string;
-        role: string;
-    }[];
+    softSkills?: string[];
+    teamMembers?: JobTeamMember[];
     title: string;
 };
 
-export type JobOfferDB = {
+export type JobRecruitmentStep = {
+    name: string;
+    timeInMinute: number;
+};
+
+export type JobTeamMember = {
+    firstName: string;
+    lastName: string;
+    role: string;
+};
+// #endregion
+
+// #region --- Database models
+export type JobDB = {
     city: string;
     company_id: number;
     contract: string;
@@ -62,3 +71,4 @@ export type JobTeamMemberDB = {
     logo?: string;
     role: string;
 };
+// #endregion

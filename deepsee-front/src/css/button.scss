@@ -1,17 +1,17 @@
 button {
-    display: flex;
     align-items: center;
-    justify-content: center;
     background-color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
     font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
     font-weight: 600;
     padding: 12px 18px;
     transition: background-color 0.2s;
     width: fit-content;
-    font-size: 14px;
 }
 
 button:hover {
@@ -19,9 +19,9 @@ button:hover {
 }
 
 button.active {
-    font-weight: 700;
     background-color: #D0FBFF;
-    color: #0098b6;
+    color: var(--primary);
+    font-weight: 700;
 }
 
 button.active:hover {
@@ -30,8 +30,8 @@ button.active:hover {
 
 // Background primary
 button.primary {
-    border: 2px solid #00b2ca;
-    background-color: #00b2ca;
+    background-color: var(--primary);
+    border: 2px solid var(--primary);
     color: white;
 }
 
@@ -40,9 +40,9 @@ button.primary:hover {
 }
 
 button.primary.border {
-    border: 2px solid #00b2ca;
     background-color: white;
-    color: #00b2ca;
+    border: 2px solid var(--primary);
+    color: var(--primary);
 }
 
 button.primary.border:hover {
@@ -51,8 +51,8 @@ button.primary.border:hover {
 
 // Background secondary
 button.secondary {
-    border: 2px solid #091C42;
-    background-color: #091C42;
+    background-color: var(--secondary);
+    border: 2px solid var(--secondary);
     color: white;
 }
 
@@ -61,19 +61,19 @@ button.secondary:hover {
 }
 
 button.round {
-    display: flex;
     align-items: center;
-    justify-content: center;
     border-radius: 30px;
+    display: flex;
+    justify-content: center;
     padding: 8px;
 }
 
 
 button.rounded {
-    display: flex;
     align-items: center;
-    justify-content: center;
     border-radius: 30px;
+    display: flex;
+    justify-content: center;
     padding: 8px 12px;
 }
 
@@ -86,8 +86,8 @@ button.bubble {
 }
 
 button.small {
-    padding: 8px 12px;
     font-size: 12px;
+    padding: 8px 12px;
 }
 
 @media (max-width: 900px) {
@@ -96,7 +96,7 @@ button.small {
     }
 
     button img {
-        width: 20px;
         height: 20px;
+        width: 20px;
     }
 }

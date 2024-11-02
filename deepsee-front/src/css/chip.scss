@@ -1,42 +1,37 @@
 .chip {
-  padding: 6px 12px;
-  border-radius: 30px;
-  width: fit-content;
-  font-weight: 600;
-  font-size: 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    width: fit-content;
 }
 
 .accent-1 {
-  background-color: #EC368D;
-  color: white;
+    background-color: var(--accent-1);
+    color: white;
 }
 
 .accent-2 {
-  background-color: #e65c36;
-  color: white;
+    background-color: var(--accent-2);
+    color: white;
 }
 
 .accent-3 {
-  background-color: #ec962d;
-  color: white;
+    background-color: var(--accent-3);
+    color: white;
 }
 
 .border.green {
-  border: 2px solid #00b487;
-  color: #00b487;
+    border: 2px solid var(--green);
+    color: var(--green);
 }
 
 .border.grey {
-  border: 2px solid #8796B6;
-  color: #8796B6;
+    border: 2px solid var(--grey);
+    color: var(--grey);
 }
 
 .border.red {
-  border: 2px solid #df1e1e;
-  color: #df1e1e;
-}
-
-.border.blue {
-  border: 2px solid #0793b6;
-  color: #0793b6;
+    border: 2px solid var(--red);
+    color: var(--red);
 }

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import jobCard from 'src/components/job-card-component.vue';
+import seaShapeComponent from 'src/components/sea-shape-component.vue';
+import { getJobsByFilters } from 'src/services/job-service';
+import { GetJobsByFiltersResponse, SearchJobsFilter } from 'src/services/job-type';
 import { onMounted, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
-
-import jobCard from '../components/job-card-component.vue';
-import seaShapeComponent from '../components/sea-shape-component.vue';
-import { getJobOffersByFilters, JobOffersByFilters, SearchJobOffersFilter } from '../services/job-offers-service';
 
 const router = useRouter();
 
@@ -21,7 +21,7 @@ const contractTypesOptions = [
     { label: 'Intérim', value: 'Intérim' },
 ];
 
-const searchFilters: Ref<SearchJobOffersFilter> = ref({
+const searchFilters: Ref<SearchJobsFilter> = ref({
     city: '',
     companyName: '',
     companySector: '',
@@ -30,19 +30,18 @@ const searchFilters: Ref<SearchJobOffersFilter> = ref({
     minSalary: '',
 });
 
-const jobOffers: Ref<JobOffersByFilters> = ref([]);
+const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
 
-const searchJobOffers = async () => {
-    jobOffers.value = await getJobOffersByFilters({ searchFilters: searchFilters.value });
-
+const searchJobs = async () => {
+    jobs.value = await getJobsByFilters({ searchFilters: searchFilters.value });
 };
 
-const goToJobOffer = (id: number) => {
+const goToSelectedJob = (id: number) => {
     router.push({ name: 'job-detail', params: { id } });
 };
 
 onMounted(async () => {
-    await searchJobOffers();
+    await searchJobs();
 });
 </script>
 
@@ -54,7 +53,7 @@ onMounted(async () => {
         />
     </div>
 
-    <div class="search-container">
+    <div class="laptop search-container">
         <div class="search-content">
             <h1 class="text-center text-white mb-28">
                 Rechercher votre job idéal
@@ -103,7 +102,7 @@ onMounted(async () => {
 
                 <button
                     class="primary bubble"
-                    @click="searchJobOffers"
+                    @click="searchJobs"
                 >
                     <search-icon
                         :height="32"
@@ -119,7 +118,7 @@ onMounted(async () => {
         </div>
     </div>
 
-    <div class="mobile-search-container">
+    <div class="mobile mobile-search-container">
         <div class="mobile-search mb-8">
             <input
                 v-model="searchFilters.jobTitle"
@@ -141,10 +140,10 @@ onMounted(async () => {
 
             <div class="list-job">
                 <job-card
-                    v-for="job in jobOffers"
+                    v-for="job in jobs"
                     :key="job.__id"
                     :job="job"
-                    @click="goToJobOffer(job.__id)"
+                    @click="goToSelectedJob(job.__id)"
                 />
             </div>
         </div>
@@ -153,17 +152,9 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 @media (max-width: 900px) {
-    .search-container {
-        display: none !important;
-    }
-
-    .mobile-search-container {
-        display: block !important;
-    }
-
     .list {
-        padding-top: 120px;
         margin: 28px !important;
+        padding-top: 120px;
     }
 
     .list-job {
@@ -183,30 +174,29 @@ onMounted(async () => {
 }
 
 .mobile-search-container {
-    display: none;
+    margin: 18px;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
     width: calc(100% - 36px);
-    margin: 18px;
 }
 
 .mobile-search {
     background-color: white;
     border-radius: 30px;
-    padding: 8px 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px 12px;
 }
 
 .search-container {
-    position: absolute;
-    top: 180px;
-    width: calc(100% - 160px);
-    margin: 0 80px;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 0 80px;
+    position: absolute;
+    top: 180px;
+    width: calc(100% - 160px);
 }
 
 .search-content {
@@ -216,32 +206,24 @@ onMounted(async () => {
 
 .search {
     background-color: white;
-    padding: 18px 18px 18px 38px;
     border-radius: 100px;
+    padding: 18px 18px 18px 38px;
 }
 
 button.bubble {
-    width: 84px;
     height: 84px;
+    width: 84px;
 }
 
 .list {
+    margin: 28px 80px;
     max-width: 1200px;
     width: 100%;
-    margin: 28px 80px;
 }
 
 .list-job {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 28px;
-}
-
-.card {
-    box-sizing: border-box;
-}
-
-.card:hover {
-    background-color: #e3e7ef;
+    grid-template-columns: repeat(3, 1fr);
 }
 </style>

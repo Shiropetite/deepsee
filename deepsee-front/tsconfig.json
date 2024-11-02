@@ -1,5 +1,11 @@
 {
-  "compilerOptions": {
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": { /* Specify a set of entries that re-map imports to additional lookup locations. */
+            "src/*": [
+                "src/*"
+            ]
+        },
       "target": "ES2020",
       "useDefineForClassFields": true,
       "module": "ESNext",

@@ -1,13 +1,16 @@
+// #region --- Models
 export type Company = {
     __id: number;
-    advantages: string[];
+    advantages?: string[];
     description: string;
     logo: string;
     name: string;
     numberOfEmployee: number;
     sector: string;
 };
+// #endregion
 
+// #region --- Database models
 export type CompanyDB = {
     description: string;
     id: number;
@@ -21,3 +24,4 @@ export type CompanyAdvantageDB = {
     company_id: number;
     name: string;
 };
+// #endregion

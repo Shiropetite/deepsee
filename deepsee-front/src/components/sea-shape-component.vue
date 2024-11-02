@@ -1,20 +1,21 @@
 <script lang="ts" setup>
 defineProps<{
-    fillColor?: string;
     fillImage?: string;
     laptopHeight?: string;
     mobileHeight?: string;
+    oneWaveLaptop?: boolean;
 }>();
 </script>
 
 <template>
     <svg
+        v-if="!oneWaveLaptop"
         class="sea-laptop"
         :width="'100%'"
         :height="laptopHeight ?? '500px'"
-        viewBox="0 0 1920 500"
+        viewBox="0 0 860 490"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMaxYMax slice"
     >
         <defs>
             <pattern
@@ -26,19 +27,35 @@ defineProps<{
             >
                 <image
                     :href="fillImage"
-                    width="1920"
-                    height="500"
+                    width="860"
+                    height="490"
                     preserveAspectRatio="xMidYMid slice"
                 />
             </pattern>
         </defs>
 
         <path
-            d="M0 0H1920V380L1818.43 439.247C1731.24 490.112 1625.25 497.186 1532.06 458.36V458.36C1472.09
-            433.371 1405.97 427.09 1342.36 440.341L1153.14 479.763C1025.75 506.303 894.254 506.303 766.865
-            479.763L577.639 440.342C514.034 427.09 447.909 433.371 387.936 458.36V458.36C294.754 497.186
-            188.763 490.112 101.567 439.247L0 380V0Z"
-            :fill="fillImage ? 'url(#imageFill)' : fillColor"
+            d="M0 0H860V427.976L814.83 458.264C775.404 484.699 727.959 488.743 685.716 469.27C659.123 457.011
+             630.117 453.932 602.094 460.391L516.453 480.13C459.358 493.29 400.642 493.29 343.547 480.13L257.906
+             460.391C229.883 453.932 200.877 457.011 174.284 469.27C132.041 488.743 84.5962 484.699
+             45.1702 458.264L0 427.976V0Z"
+            :fill="fillImage ? 'url(#imageFill)' : '#091C42'"
+        />
+    </svg>
+
+    <svg
+        v-if="oneWaveLaptop"
+        class="sea-laptop"
+        :width="'100%'"
+        :height="laptopHeight ?? '500px'"
+        viewBox="0 0 412 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMaxYMax slice"
+    >
+        <path
+            d="M0 0H412V110C276.209 120 135.791 120 0 110V0Z"
+            fill="#091C42"
         />
     </svg>
 
@@ -49,7 +66,7 @@ defineProps<{
         viewBox="0 0 412 142"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMaxYMax slice"
     >
         <path
             d="M0 0H412V119.846V119.846C276.209 148.952 135.791 148.952 0 119.846V119.846V0Z"

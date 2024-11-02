@@ -1,3 +1,8 @@
+/**
+ * Formate le temps écoulé entre aujourd'hui et une date donnée
+ * @param dateSince - la date depuis laquelle on veut calculer le temps écoulé
+ * @returns Le temps écoulé formaté
+ */
 export const formatTimeElapsedSince = (dateSince: string): string => {
     const now = new Date();
     const past = new Date(dateSince);

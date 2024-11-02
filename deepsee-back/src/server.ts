@@ -4,8 +4,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 
-import { getJobOfferById, getJobOffersByFilters } from './controllers/job-offer-controller';
 import { connectToDatabase } from './database';
+import jobRouter from './routers/job-router';
 
 dotenv.config();
 
@@ -23,8 +23,6 @@ app.get('/api', (req, res) => {
     res.send('Hello World!');
 });
 
-// --- Job Offers ---
-app.get('/api/job-offers', getJobOffersByFilters);
-app.get('/api/job-offers/:id', getJobOfferById);
+app.use('/api/job-offers', jobRouter);
 
 app.use('/api/files', express.static(path.join(__dirname, '../files')));

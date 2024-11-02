@@ -93,8 +93,8 @@ const getLabel = (value: string) => {
 
 <style lang="scss" scoped>
 .select {
-    width: 100%;
     position: relative;
+    width: 100%;
 }
 
 .select-input {
@@ -126,7 +126,7 @@ const getLabel = (value: string) => {
 
 .options {
     background-color: white;
-    border: solid 1px #e0e0e0;
+    border: solid 1px white;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     left: 0;

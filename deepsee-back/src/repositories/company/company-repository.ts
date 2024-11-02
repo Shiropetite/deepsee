@@ -1,16 +1,13 @@
-import { client } from '../database';
-import { Company, CompanyDB } from '../models/company-model';
+import { client } from 'src/database';
+import { Company } from 'src/models/company-model';
 
-const parseCompany = ({ queryResult }: { queryResult: CompanyDB }): Company => ({
-    __id: queryResult.id,
-    advantages: [],
-    description: queryResult.description,
-    logo: queryResult.logo,
-    name: queryResult.name,
-    numberOfEmployee: queryResult.number_of_employee,
-    sector: queryResult.sector,
-});
+import { parseCompany, parseCompanyAdvantages } from './company-parser';
 
+/**
+ * Récupère une entreprise en BDD en fonction de son id
+ * @param companyId - Id de l'entreprise
+ * @returns L'entreprise en BDD
+ */
 export const fetchCompanyById = async (
     { companyId }: { companyId: number }
 ): Promise<Company | undefined> => {
@@ -19,6 +16,11 @@ export const fetchCompanyById = async (
     return queryResult ? parseCompany({ queryResult }) : undefined;
 };
 
+/**
+ * Récupère les avantages de l'entreprise en BDD en fonction de son id
+ * @param companyId - Id de l'entreprise
+ * @returns Les avantages de l'entreprise en BDD
+ */
 export const fetchCompanyAdvantages = async (
     { companyId }: { companyId: number }
 ): Promise<string[]> => {
@@ -27,9 +29,14 @@ export const fetchCompanyAdvantages = async (
         [companyId],
     );
 
-    return queryResult.rows.map((row) => row.name);
+    return queryResult.rows.map((row) => parseCompanyAdvantages({ queryResult: row }));
 };
 
+/**
+ * Construit l'url du logo de l'entreprise
+ * @param companyName - Nom de l'entreprise
+ * @returns L'url du logo de l'entreprise
+ */
 export const fetchCompanyLogo = ({ companyName }: { companyName: string }) => {
     return `${
         process.env.ENV === 'local' ?

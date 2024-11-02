@@ -8,6 +8,9 @@ export let client = new Client();
 const localConfig = false;
 const prodConfig = { rejectUnauthorized: false };
 
+/**
+ * Connecte à la base de données
+ */
 export const connectToDatabase = async (): Promise<void> => {
     console.warn('Connecting to database...');
     console.warn(`Database: ${process.env.ENV} ${process.env.DB_NAME}`);
@@ -30,6 +33,10 @@ export const connectToDatabase = async (): Promise<void> => {
     runMigrations(client);
 };
 
+/**
+ * Parcours tout les fichiers de migrations et les exécute
+ * @param client - Client de la base de données
+ */
 const runMigrations = async (client: Client) => {
     const migrationDir = path.join(process.cwd(), 'migrations');
     const files = await readdirSync(migrationDir);
@@ -45,6 +52,12 @@ const runMigrations = async (client: Client) => {
     console.warn('Migrations completed 👍');
 };
 
+/**
+ * Exécute tout un script SQL de migration
+ * @param client - Client de la base de données
+ * @param file - Nom du fichier de migration
+ * @param migrationDir - Dossier contenant les fichiers de migration
+ */
 const applyMigration = async (client: Client, file: string, migrationDir: string): Promise<boolean> => {
     const migrationScript = readFileSync(join(migrationDir, file), 'utf8');
 
