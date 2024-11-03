@@ -7,7 +7,7 @@ import {
     JobSoftSkillDB,
     JobTeamMember,
     JobTeamMemberDB,
-} from 'src/models/job-model';
+} from '../../models/job-model';
 
 /**
  * Parse un JobDB en Job

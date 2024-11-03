@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { getJobById, getJobsByFilters } from 'src/controllers/job-controller';
+
+import { getJobById, getJobsByFilters } from '../controllers/job-controller';
 
 const jobRouter = Router();
 

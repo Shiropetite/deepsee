@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
+
 import {
     fetchCompanyAdvantages,
     fetchCompanyById,
     fetchCompanyLogo,
-} from 'src/repositories/company/company-repository';
+} from '../repositories/company/company-repository';
 import {
     fetchJobById,
     fetchJobsByFilters,
@@ -11,7 +12,7 @@ import {
     getJobRecruitmentSteps,
     getJobSoftSkills,
     getJobTeamMembers,
-} from 'src/repositories/job/job-repository';
+} from '../repositories/job/job-repository';
 
 import { getJobByIdResponse, getJobsByFilterQuery, getJobsByFilterResponse } from './job-types';
 

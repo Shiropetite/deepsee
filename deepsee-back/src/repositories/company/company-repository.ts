@@ -1,5 +1,5 @@
-import { client } from 'src/database';
-import { Company } from 'src/models/company-model';
+import { client } from '../../database';
+import { Company } from '../../models/company-model';
 
 import { parseCompany, parseCompanyAdvantages } from './company-parser';
 

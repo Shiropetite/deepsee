@@ -1,4 +1,4 @@
-import { Company, CompanyAdvantageDB, CompanyDB } from 'src/models/company-model';
+import { Company, CompanyAdvantageDB, CompanyDB } from '../../models/company-model';
 
 /**
  * Parse une CompanyDB en Company

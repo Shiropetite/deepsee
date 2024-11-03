@@ -1,6 +1,6 @@
-import { getJobsByFilterQuery } from 'src/controllers/job-types';
-import { client } from 'src/database';
-import { Job, JobDB, JobRecruitmentStep, JobTeamMember } from 'src/models/job-model';
+import { getJobsByFilterQuery } from '../../controllers/job-types';
+import { client } from '../../database';
+import { Job, JobDB, JobRecruitmentStep, JobTeamMember } from '../../models/job-model';
 
 import {
     parseJob, parseJobHardSkills, parseJobRecruitmentStep, parseJobSoftSkills, parseJobTeamMember } from './job-parser';
