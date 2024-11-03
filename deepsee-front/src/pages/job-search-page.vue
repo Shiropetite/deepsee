@@ -49,7 +49,6 @@ onMounted(async () => {
     <div class="sea">
         <sea-shape-component
             fill-image="/sea-background.png"
-            height="580px"
         />
     </div>
 
@@ -61,18 +60,16 @@ onMounted(async () => {
 
             <div class="search row gap-18 mb-12">
                 <div class="column gap-12 width-100">
-                    <input
+                    <text-input
                         v-model="searchFilters.jobTitle"
                         placeholder="Rechercher un job"
-                        type="text"
-                    >
+                    />
 
                     <div class="row gap-12">
-                        <input
+                        <text-input
                             v-model="searchFilters.city"
                             placeholder="Ville"
-                            type="text"
-                        >
+                        />
 
                         <select-input
                             v-model="searchFilters.contract"
@@ -80,23 +77,20 @@ onMounted(async () => {
                             style="min-width: 180px;"
                         />
 
-                        <input
+                        <text-input
                             v-model="searchFilters.companyName"
                             placeholder="Entreprise"
-                            type="text"
-                        >
+                        />
 
-                        <input
+                        <text-input
                             v-model="searchFilters.companySector"
                             placeholder="Secteur"
-                            type="text"
-                        >
+                        />
 
-                        <input
+                        <text-input
                             v-model="searchFilters.minSalary"
                             placeholder="Salaire minimum"
-                            type="text"
-                        >
+                        />
                     </div>
                 </div>
 

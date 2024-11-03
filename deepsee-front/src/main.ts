@@ -1,3 +1,4 @@
+import textInput from 'src/components/text-input-component.vue';
 import { createApp } from 'vue';
 
 import App from './App.vue';
@@ -13,5 +14,6 @@ app.use(router);
 
 app.component('SelectInput', selectInput);
 app.component('SearchIcon', searchIcon);
+app.component('TextInput', textInput);
 
 app.mount('#app');

@@ -6,6 +6,8 @@ type JobInfo = {
     companyLogo: string;
     companyName: string;
     contract: string;
+    salaryMaxInYear: number;
+    salaryMinInYear: number;
     title: string;
 }
 

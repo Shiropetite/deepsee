@@ -1,11 +1,13 @@
-import { GetJobByIdResponse } from 'src/services/job-type';
-
 /**
  * Formate le salaire en fonction du type de contrat
  * @param job - le job dont on veut formater le salaire
  * @returns le salaire formaté
  */
-export const formatSalary = (job: GetJobByIdResponse) => {
+export const formatSalary = (job: {
+    contract: string;
+    salaryMaxInYear: number;
+    salaryMinInYear: number;
+}) => {
     let salary = '';
 
     if (['Freelance', 'Intérim'].includes(job.contract)) {

@@ -56,7 +56,7 @@ const getLabel = (value: string) => {
                 {{ getLabel(modelValue) }}
             </div>
 
-            <img src="/icons/arrow-down-icon.png">
+            <img src="/icons/arrow-down-icon.svg">
         </button>
 
         <div

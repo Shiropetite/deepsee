@@ -18,6 +18,17 @@ button:hover {
     background-color: #d0dcea;
 }
 
+
+button.border {
+    background-color: white;
+    border: 2px solid var(--grey);
+    color: var(--grey);
+}
+
+button.icon.small {
+    padding: 2px !important;
+}
+
 button.active {
     background-color: #D0FBFF;
     color: var(--primary);

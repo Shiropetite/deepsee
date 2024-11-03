@@ -3,7 +3,7 @@ textarea:focus-visible {
     outline: none;
 }
 
-input,
+.text-input,
 textarea,
 .select-input {
     border: 1px solid var(--grey);
@@ -13,8 +13,8 @@ textarea,
     min-height: 16px;
     padding: 8px 12px;
     resize: none;
-    transition: border-color 0.2s;
     width: calc(100% - 20px);
+    transition: border-color 0.2s;
 }
 
 ::placeholder {
