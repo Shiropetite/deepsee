@@ -23,12 +23,13 @@ WORKDIR /usr/src/app
 COPY --from=build-frontend /app/deepsee-front/dist /usr/src/app/public
 COPY --from=build-backend /app/deepsee-back ./ 
 
-# Installer http-server pour servir le frontend
-RUN npm install -g http-server
+# Installer serve pour servir le frontend
+RUN npm install -g serve
 
 # Exposer les ports nécessaires
 EXPOSE 8080
 EXPOSE 3000
 
 # Démarrer le frontend avec http-server et le backend
-CMD ["sh", "-c", "http-server public -p 8080 & node ./dist/server.js"]
+CMD ["sh", "-c", "serve -s public -l 8080 & node ./dist/server.js"]
+
