@@ -3,7 +3,7 @@ import jobCard from 'src/components/job-card-component.vue';
 import seaShapeComponent from 'src/components/sea-shape-component.vue';
 import { getJobsByFilters } from 'src/services/job-service';
 import { GetJobsByFiltersResponse, SearchJobsFilter } from 'src/services/job-type';
-import { onMounted, ref, Ref } from 'vue';
+import { onMounted, onUnmounted, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -21,6 +21,20 @@ const contractTypesOptions = [
     { label: 'Intérim', value: 'Intérim' },
 ];
 
+const minSalaryOptions = [
+    {
+        label: 'Aucun salaire minimum',
+        value: '',
+    },
+    { label: '> 20 000 € / an', value: 20000 },
+    { label: '> 30 000 € / an', value: 30000 },
+    { label: '> 40 000 € / an', value: 40000 },
+    { label: '> 50 000 € / an', value: 50000 },
+    { label: '> 60 000 € / an', value: 60000 },
+    { label: '> 70 000 € / an', value: 70000 },
+    { label: '> 80 000 € / an', value: 90000 },
+];
+
 const searchFilters: Ref<SearchJobsFilter> = ref({
     city: '',
     companyName: '',
@@ -30,6 +44,7 @@ const searchFilters: Ref<SearchJobsFilter> = ref({
     minSalary: '',
 });
 
+const isLoading = ref(false);
 const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
 
 const searchJobs = async () => {
@@ -40,8 +55,23 @@ const goToSelectedJob = (id: number) => {
     router.push({ name: 'job-detail', params: { id } });
 };
 
+const handleEnter = async (event) => {
+    if (event.key === 'Enter') {
+        isLoading.value = true;
+        await searchJobs();
+        isLoading.value = false;
+    }
+};
+
 onMounted(async () => {
+    isLoading.value = true;
+    window.addEventListener('keyup', handleEnter);
     await searchJobs();
+    isLoading.value = false;
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keyup', handleEnter);
 });
 </script>
 
@@ -87,9 +117,10 @@ onMounted(async () => {
                             placeholder="Secteur"
                         />
 
-                        <text-input
+                        <select-input
                             v-model="searchFilters.minSalary"
-                            placeholder="Salaire minimum"
+                            :options="minSalaryOptions"
+                            style="min-width: 240px;"
                         />
                     </div>
                 </div>
@@ -99,8 +130,8 @@ onMounted(async () => {
                     @click="searchJobs"
                 >
                     <search-icon
-                        :height="32"
-                        :width="32"
+                        :height="38"
+                        :width="38"
                         color="white"
                     />
                 </button>
@@ -132,7 +163,22 @@ onMounted(async () => {
                 Aujourd'hui
             </h2>
 
-            <div class="list-job">
+            <div
+                v-if="isLoading"
+                class="list-job"
+            >
+                <skeleton-card
+                    v-for="index in 9"
+                    :key="index"
+                    width="100%"
+                    height="280px"
+                />
+            </div>
+
+            <div
+                v-else
+                class="list-job"
+            >
                 <job-card
                     v-for="job in jobs"
                     :key="job.__id"
@@ -205,8 +251,8 @@ onMounted(async () => {
 }
 
 button.bubble {
-    height: 84px;
-    width: 84px;
+    height: 100px;
+    width: 100px;
 }
 
 .list {

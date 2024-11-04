@@ -50,6 +50,7 @@ defineProps<{
 <style lang="scss">
 .card {
     border: solid 3px var(--light-grey);
+    box-sizing: border-box;
     cursor: pointer;
     padding: 18px;
     transition: all linear 0.2s;
@@ -63,6 +64,6 @@ defineProps<{
 }
 
 .card.active {
-    border: solid 4px var(--primary);
+    border: solid 3px var(--primary);
 }
 </style>

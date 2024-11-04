@@ -11,6 +11,8 @@ import jobDetailBodyComponent from './job-detail-body-component.vue';
 const router = useRouter();
 const route = useRoute();
 
+const listIsLoading = ref(false);
+const jobIsLoading = ref(false);
 const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
 const jobSelected: Ref<GetJobByIdResponse | null> = ref(null);
 
@@ -23,6 +25,7 @@ const goToJob = (id: number) => {
 };
 
 const searchJobs = async () => {
+    listIsLoading.value = true;
     jobs.value = await getJobsByFilters({ searchFilters: {
         city: '',
         companyName: '',
@@ -31,11 +34,14 @@ const searchJobs = async () => {
         jobTitle: '',
         minSalary: '',
     } });
+    listIsLoading.value = false;
 };
 
 const getSelectedJob = async () => {
+    listIsLoading.value = true;
     const jobId = Number(route.params.id);
     jobSelected.value = await getJobById({ id: jobId });
+    listIsLoading.value = false;
 };
 
 onMounted(async () => {
@@ -76,7 +82,22 @@ watch(() => route.fullPath, async () => {
                         Aujourd'hui
                     </h2>
 
-                    <div class="column gap-28">
+                    <div
+                        v-if="listIsLoading"
+                        class="column gap-28"
+                    >
+                        <skeleton-card
+                            v-for="index in 8"
+                            :key="index"
+                            height="260px"
+                            width="100%"
+                        />
+                    </div>
+
+                    <div
+                        v-else
+                        class="column gap-28"
+                    >
                         <job-card
                             v-for="job in jobs"
                             :key="job.__id"
@@ -89,9 +110,9 @@ watch(() => route.fullPath, async () => {
             </div>
 
             <job-detail-body-component
-                v-if="jobSelected"
                 :go-to-search="goToSearch"
                 :job="jobSelected"
+                :is-loading="jobIsLoading"
             />
         </div>
     </div>

@@ -100,7 +100,7 @@ const getLabel = (value: string) => {
 .select-input {
     background-color: white;
     font-weight: 400;
-    height: 36px;
+    height: 44px;
     text-align: left;
     width: 100%;
 }

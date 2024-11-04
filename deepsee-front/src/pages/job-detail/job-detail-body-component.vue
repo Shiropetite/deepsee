@@ -13,6 +13,7 @@ const expectationDescriptionSeeMore = ref(false);
 
 defineProps<{
     goToSearch: () => void;
+    isLoading: boolean
     job: GetJobByIdResponse;
 }>();
 
@@ -24,7 +25,17 @@ watch(() => route.fullPath, async () => {
 </script>
 
 <template>
-    <div class="detail">
+    <skeleton-card
+        v-if="isLoading || !job"
+        class="skeleton"
+        height="100vh"
+        width="100%"
+    />
+
+    <div
+        v-else
+        class="detail"
+    >
         <div class="detail-header-container">
             <div class="detail-header">
                 <div class="row justify-between align-center gap-8 mb-12">
@@ -316,6 +327,10 @@ watch(() => route.fullPath, async () => {
     .team {
         flex: 1 1 100% !important;
     }
+}
+
+.skeleton {
+    margin-top: 160px;
 }
 
 .logo {

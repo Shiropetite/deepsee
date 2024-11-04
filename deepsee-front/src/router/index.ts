@@ -18,6 +18,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../layouts/main-layout.vue'),
         path: '/',
     },
+    {
+        component: () => import('../pages/not-found-page.vue'),
+        path: '/:pathMatch(.*)*',
+    },
 ];
 
 const router = createRouter({
