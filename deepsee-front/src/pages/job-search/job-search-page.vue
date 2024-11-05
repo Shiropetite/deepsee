@@ -6,34 +6,11 @@ import { GetJobsByFiltersResponse, SearchJobsFilter } from 'src/services/job-typ
 import { onMounted, onUnmounted, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+import mobileFilterPopup from './mobile-filter-popup.vue';
+
+import { contractTypesOptions, minSalaryOptions } from '.';
+
 const router = useRouter();
-
-const contractTypesOptions = [
-    {
-        label: 'Tous les contrats',
-        value: '',
-    },
-    { label: 'CDD', value: 'CDD' },
-    { label: 'CDI', value: 'CDI' },
-    { label: 'Alternance', value: 'Alternance' },
-    { label: 'Stage', value: 'Stage' },
-    { label: 'Freelance', value: 'Freelance' },
-    { label: 'Intérim', value: 'Intérim' },
-];
-
-const minSalaryOptions = [
-    {
-        label: 'Aucun salaire minimum',
-        value: '',
-    },
-    { label: '> 20 000 € / an', value: 20000 },
-    { label: '> 30 000 € / an', value: 30000 },
-    { label: '> 40 000 € / an', value: 40000 },
-    { label: '> 50 000 € / an', value: 50000 },
-    { label: '> 60 000 € / an', value: 60000 },
-    { label: '> 70 000 € / an', value: 70000 },
-    { label: '> 80 000 € / an', value: 90000 },
-];
 
 const searchFilters: Ref<SearchJobsFilter> = ref({
     city: '',
@@ -44,11 +21,14 @@ const searchFilters: Ref<SearchJobsFilter> = ref({
     minSalary: '',
 });
 
+const popupFilterIsOpen = ref(false);
 const isLoading = ref(false);
 const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
 
 const searchJobs = async () => {
+    isLoading.value = true;
     jobs.value = await getJobsByFilters({ searchFilters: searchFilters.value });
+    isLoading.value = false;
 };
 
 const goToSelectedJob = (id: number) => {
@@ -57,17 +37,18 @@ const goToSelectedJob = (id: number) => {
 
 const handleEnter = async (event) => {
     if (event.key === 'Enter') {
-        isLoading.value = true;
         await searchJobs();
-        isLoading.value = false;
     }
 };
 
+const popupFilterClose = async () => {
+    popupFilterIsOpen.value = false;
+    await searchJobs();
+};
+
 onMounted(async () => {
-    isLoading.value = true;
     window.addEventListener('keyup', handleEnter);
     await searchJobs();
-    isLoading.value = false;
 });
 
 onUnmounted(() => {
@@ -79,6 +60,7 @@ onUnmounted(() => {
     <div class="sea">
         <sea-shape-component
             fill-image="/sea-background.png"
+            mobile-height="140px"
         />
     </div>
 
@@ -144,12 +126,14 @@ onUnmounted(() => {
     </div>
 
     <div class="mobile mobile-search-container">
-        <div class="mobile-search mb-8">
-            <input
+        <div
+            class="mobile-search mb-6"
+            @click="popupFilterIsOpen = true"
+        >
+            <text-input
                 v-model="searchFilters.jobTitle"
                 placeholder="Rechercher un job"
-                type="text"
-            >
+            />
         </div>
 
         <div class="row justify-end text-white mr-28">
@@ -188,6 +172,15 @@ onUnmounted(() => {
             </div>
         </div>
     </div>
+
+    <popup-component
+        :is-open="popupFilterIsOpen"
+        :max-width="800"
+        :title="'Filtres de recherche'"
+        @close="popupFilterClose"
+    >
+        <mobile-filter-popup v-model="searchFilters" />
+    </popup-component>
 </template>
 
 <style lang="scss" scoped>

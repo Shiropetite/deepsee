@@ -316,6 +316,10 @@ watch(() => route.fullPath, async () => {
 
 <style lang="scss" scoped>
 @media (max-width: 900px) {
+    .skeleton {
+        margin-top: 56px !important;
+    }
+
     .detail-header-container {
         padding-top: 56px !important;
     }
