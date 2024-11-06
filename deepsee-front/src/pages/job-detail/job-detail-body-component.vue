@@ -77,12 +77,12 @@ watch(() => route.fullPath, async () => {
                 <div class="row justify-end gap-8">
                     <button class="primary round label-icon row gap-8">
                         <img src="/icons/send-icon.png">
-                        <div>Postuler</div>
+                        <div>{{ $t("apply") }}</div>
                     </button>
 
                     <button class="secondary round label-icon row gap-8">
                         <img src="/icons/favorite-icon.png">
-                        <div>Favoris</div>
+                        <div>{{ $t("favorite") }}</div>
                     </button>
                 </div>
             </div>
@@ -91,7 +91,7 @@ watch(() => route.fullPath, async () => {
         <div class="detail-body column gap-28">
             <div>
                 <div class="title mb-6">
-                    Résumé
+                    {{ $t("summary") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -108,11 +108,11 @@ watch(() => route.fullPath, async () => {
                     </div>
 
                     <div class="chip border grey">
-                        {{ job.dayOfRemoteWork }} jours de télétravail / semaine
+                        {{ $t("dayOfRemoteWork", { count: job.dayOfRemoteWork }) }}
                     </div>
 
                     <div class="chip border grey">
-                        {{ job.experienceMinInYear }} an d'expérience
+                        {{ $t("yearOfExperience", { count: job.experienceMinInYear }) }}
                     </div>
 
                     <div class="chip border grey">
@@ -123,7 +123,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    Description de l'entreprise
+                    {{ $t("companyDescription") }}
                 </div>
 
                 <div
@@ -139,7 +139,7 @@ watch(() => route.fullPath, async () => {
                     </div>
 
                     <div class="chip border grey">
-                        {{ job.companyNumberOfEmployees }} employées
+                        {{ $t("nbEmployee", { count: job.companyNumberOfEmployees }) }}
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="companyDescriptionSeeMore = true"
                     >
-                        Voir plus
+                        {{ $t("seeMore") }}
                     </button>
 
                     <button
@@ -157,14 +157,14 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="companyDescriptionSeeMore = false"
                     >
-                        Voir moins
+                        {{ $t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-8">
-                    Description de l'offre
+                    {{ $t("jobDescription") }}
                 </div>
 
                 <div
@@ -180,7 +180,7 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="jobDescriptionSeeMore = true"
                     >
-                        Voir plus
+                        {{ $t("seeMore") }}
                     </button>
 
                     <button
@@ -188,14 +188,14 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="jobDescriptionSeeMore = false"
                     >
-                        Voir moins
+                        {{ $t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-6">
-                    Compétences
+                    {{ $t("skills") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -211,7 +211,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    Description des attentes
+                    {{ $t("expectationsDescription") }}
                 </div>
 
                 <div
@@ -227,7 +227,7 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="expectationDescriptionSeeMore = true"
                     >
-                        Voir plus
+                        {{ $t("seeMore") }}
                     </button>
 
                     <button
@@ -235,14 +235,14 @@ watch(() => route.fullPath, async () => {
                         class="secondary small"
                         @click="expectationDescriptionSeeMore = false"
                     >
-                        Voir moins
+                        {{ $t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-6">
-                    Traits recherchés
+                    {{ $t("softSkills") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -258,7 +258,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    Etapes de recrutement
+                    {{ $t("recruitmentSteps") }}
                 </div>
 
                 <div class="column gap-8">
@@ -273,7 +273,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    Descriptif de l’équipe
+                    {{ $t("teamDescription") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -297,7 +297,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    Avantages entreprise
+                    {{ $t("companyAdvantages") }}
                 </div>
 
                 <div class="row wrap gap-8">

@@ -15,16 +15,16 @@ import mobileMenu from 'src/layouts/mobile-menu-component.vue';
     <div class="content column align-center gap-28">
         <div class="text-center">
             <h1 class="mb-12">
-                Oups !
+                {{ $t('oops') }}
             </h1>
             <div>
-                Cette page n'existe pas !
+                {{ $t('pageNotFound') }}
             </div>
         </div>
 
         <router-link to="/">
             <button class="primary">
-                Revenir à l'accueil
+                {{ $t('backHome') }}
             </button>
         </router-link>
     </div>

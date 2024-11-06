@@ -1,0 +1,69 @@
+{
+    "account": "Compte",
+    "apply": "Postuler",
+    "backHome": "Retour à l'accueil",
+    "contact": "Contact",
+    "contractType": {
+        "all": "Tout les contrats",
+        "permanent": "CDI",
+        "fixedTerm": "CDD",
+        "internship": "Stage",
+        "freelance": "Freelance",
+        "temporary": "Intérim",
+        "workStudy": "Alternance"
+    },
+    "company": "Entreprise",
+    "companyAdvantages": "Avantages de l'entreprise",
+    "companyDescription": "Description de l'entreprise",
+    "dayOfRemoteWork": "Présentiel | { count } jour de télétravail / semaine | { count } jours de télétravail / semaine",
+    "expectationsDescription": "Description des attentes",
+    "favorite": "Favoris",
+    "goBack": "Retour",
+    "job": "Job",
+    "jobDescription": "Description de l'offre",
+    "jobSearchPage": {
+        "title": "Rechercher votre job idéal",
+        "jobTitle": "Recherche un job",
+        "city": "Ville",
+        "companyName": "Entreprise",
+        "companySector": "Secteur",
+        "jobFound": "{ count } job trouvé | { count } jobs trouvés",
+        "searchFilter" : "Filtres de recherche"
+    },
+    "legalNotice":"Mentions légales",
+    "minSalaryOptions": {
+        "none": "Aucun salaire minimum"
+    },
+    "nbEmployee": "{ count } employé | { count } employés",
+    "oops": "Oups !",
+    "pageNotFound": "La page que vous recherchez n'existe pas.",
+    "privacyPolicy": "Politique de confidentialité",
+    "recruitmentSteps": "Étapes de recrutement",
+    "salary": {
+        "minByDay": "> { salary } € / jour",
+        "minByYear": "> { salary }K € / an",
+        "rangeByDay": "{ min } - { max } € / jour",
+        "rangeByYear": "{ min }K - { max }K € / an"
+    },
+    "searchCompany": "Chercher une entreprise",
+    "searchJob": "Chercher un job",
+    "seeLess": "Voir moins",
+    "seeMore": "Voir plus",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "skills": "Compétences",
+    "softSkills": "Traits recherchés",
+    "summary": "Résumé",
+    "teamDescription": "Descriptif de l'équipe",
+    "termOfUse": "CGU",
+    "time": {
+        "yearAgo": "il y a { count } an | il y a { count } ans",
+        "monthAgo": "il y a { count } mois | il y a { count } mois",
+        "dayAgo": "il y a { count } jour | il y a { count } jours",
+        "hourAgo": "il y a { count } heure | il y a { count } heures",
+        "minuteAgo": "il y a { count } minute | il y a { count } minutes",
+        "secondAgo": "il y a { count } seconde | il y a { count } secondes"
+    },
+    "today": "Aujourd'hui",
+    "yearOfExperience": "{ count } an d'expérience | { count } ans d'expérience"
+}

@@ -73,13 +73,13 @@ watch(() => route.fullPath, async () => {
                         @click="goToSearch"
                     >
                         <img src="/icons/arrow-left-icon.png">
-                        <div>Retour</div>
+                        <div>{{ $t('goBack') }}</div>
                     </button>
                 </div>
 
                 <div class="list-body">
                     <h2 class="mb-18">
-                        Aujourd'hui
+                        {{ $t("today") }}
                     </h2>
 
                     <div

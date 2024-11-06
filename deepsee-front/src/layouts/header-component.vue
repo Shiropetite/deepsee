@@ -14,25 +14,25 @@
             <div class="separator" />
 
             <button class="active">
-                Chercher un job
+                {{ $t("searchJob") }}
             </button>
 
             <div class="separator" />
 
             <button>
-                Chercher une entreprise
+                {{ $t("searchCompany") }}
             </button>
         </div>
 
         <div class="header row align-center gap-8">
             <button>
-                S'inscrire
+                {{ $t("signUp") }}
             </button>
 
             <div class="separator" />
 
             <button class="primary">
-                Se connecter
+                {{ $t("signIn") }}
             </button>
         </div>
     </div>

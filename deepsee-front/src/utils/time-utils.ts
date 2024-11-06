@@ -1,3 +1,5 @@
+import i18n from 'src/i18n';
+
 /**
  * Formate le temps écoulé entre aujourd'hui et une date donnée
  * @param dateSince - la date depuis laquelle on veut calculer le temps écoulé
@@ -8,32 +10,30 @@ export const formatTimeElapsedSince = (dateSince: string): string => {
     const past = new Date(dateSince);
     const seconds = Math.floor((now.getTime() - past.getTime()) / 1000);
 
-    let interval = Math.floor(seconds / 31536000);
-    if (interval >= 1) {
-        return `il y a ${interval} ${interval === 1 ? 'année' : 'années'}`;
+    let count = Math.floor(seconds / 31536000);
+    if (count >= 1) {
+        return i18n.global.t('time.yearAgo', { count }).toString();
     }
 
-    interval = Math.floor(seconds / 2592000);
-    if (interval >= 1) {
-        return `il y a ${interval} ${interval === 1 ? 'mois' : 'mois'}`;
+    count = Math.floor(seconds / 2592000);
+    if (count >= 1) {
+        return i18n.global.t('time.monthAgo', { count }).toString();
     }
 
-    interval = Math.floor(seconds / 86400);
-    if (interval >= 1) {
-        return `il y a ${interval} ${interval === 1 ? 'jour' : 'jours'}`;
+    count = Math.floor(seconds / 86400);
+    if (count >= 1) {
+        return i18n.global.t('time.dayAgo', { count }).toString();
     }
 
-    interval = Math.floor(seconds / 3600);
-    if (interval >= 1) {
-        return `il y a ${interval} ${interval === 1 ? 'heure' : 'heures'}`;
+    count = Math.floor(seconds / 3600);
+    if (count >= 1) {
+        return i18n.global.t('time.hourAgo', { count }).toString();
     }
 
-    interval = Math.floor(seconds / 60);
-    if (interval >= 1) {
-        return `il y a ${interval} ${interval === 1 ? 'minute' : 'minutes'}`;
+    count = Math.floor(seconds / 60);
+    if (count >= 1) {
+        return i18n.global.t('time.minuteAgo', { count }).toString();
     }
 
-    if (seconds < 5) return 'à l\'instant';
-
-    return `il y a ${Math.floor(seconds)} ${seconds === 1 ? 'seconde' : 'secondes'}`;
+    return 'à l\'instant';
 };

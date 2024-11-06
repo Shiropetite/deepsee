@@ -4,16 +4,16 @@
 
         <div class="row gap-8">
             <button class="secondary">
-                Mentions légales
+                {{ $t("legalNotice") }}
             </button>
             <button class="secondary">
-                Politique de confidentialité
+                {{ $t("privacyPolicy") }}
             </button>
             <button class="secondary">
-                CGU
+                {{ $t("termOfUse") }}
             </button>
             <button class="secondary">
-                Contact
+                {{ $t("contact") }}
             </button>
         </div>
     </div>
@@ -21,16 +21,16 @@
     <div class="mobile footer footer-mobile">
         <div class="column">
             <button class="secondary small">
-                Mentions légales
+                {{ $t("legalNotice") }}
             </button>
             <button class="secondary small">
-                Politique de confidentialité
+                {{ $t("privacyPolicy") }}
             </button>
             <button class="secondary small">
-                CGU
+                {{ $t("termOfUse") }}
             </button>
             <button class="secondary small">
-                Contact
+                {{ $t("contact") }}
             </button>
         </div>
 

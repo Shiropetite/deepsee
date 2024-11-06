@@ -6,6 +6,7 @@ import searchIcon from './components/icons/search-icon.vue';
 import popupComponent from './components/popup-component.vue';
 import selectInput from './components/select-input-component.vue';
 import skeletonCard from './components/skeleton-card-component.vue';
+import i18n from './i18n';
 import router from './router';
 
 import './css/global.scss';
@@ -13,6 +14,7 @@ import './css/global.scss';
 const app = createApp(App);
 
 app.use(router);
+app.use(i18n);
 
 app.component('SelectInput', selectInput);
 app.component('SearchIcon', searchIcon);

@@ -2,15 +2,15 @@
     <div class="mobile mobile-menu-container">
         <div class="mobile-menu row">
             <button class="active width-100">
-                Job
+                {{ $t("job") }}
             </button>
 
             <button class="width-100">
-                Entreprise
+                {{ $t("company") }}
             </button>
 
             <button class="width-100">
-                Compte
+                {{ $t("company") }}
             </button>
         </div>
     </div>

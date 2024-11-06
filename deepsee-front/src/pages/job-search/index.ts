@@ -1,26 +1,67 @@
+import i18n from 'src/i18n';
+
 export const contractTypesOptions = [
     {
-        label: 'Tous les contrats',
+        label: i18n.global.t('contractType.all'),
         value: '',
     },
-    { label: 'CDD', value: 'CDD' },
-    { label: 'CDI', value: 'CDI' },
-    { label: 'Alternance', value: 'Alternance' },
-    { label: 'Stage', value: 'Stage' },
-    { label: 'Freelance', value: 'Freelance' },
-    { label: 'Intérim', value: 'Intérim' },
+    {
+        label: i18n.global.t('contractType.permanent'),
+        value: 'CDI',
+    },
+    {
+        label: i18n.global.t('contractType.fixedTerm'),
+        value: 'CDD',
+    },
+    {
+        label: i18n.global.t('contractType.workStudy'),
+        value: 'Alternance',
+    },
+    {
+        label: i18n.global.t('contractType.internship'),
+        value: 'Stage',
+    },
+    {
+        label: i18n.global.t('contractType.freelance'),
+        value: 'Freelance',
+    },
+    {
+        label: i18n.global.t('contractType.temporary'),
+        value: 'Intérim',
+    },
 ];
 
 export const minSalaryOptions = [
     {
-        label: 'Aucun salaire minimum',
+        label: i18n.global.t('minSalaryOptions.none'),
         value: '',
     },
-    { label: '> 20 000 € / an', value: 20000 },
-    { label: '> 30 000 € / an', value: 30000 },
-    { label: '> 40 000 € / an', value: 40000 },
-    { label: '> 50 000 € / an', value: 50000 },
-    { label: '> 60 000 € / an', value: 60000 },
-    { label: '> 70 000 € / an', value: 70000 },
-    { label: '> 80 000 € / an', value: 90000 },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 20000 }),
+        value: 20000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 30000 }),
+        value: 30000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 40000 }),
+        value: 40000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 50000 }),
+        value: 50000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 60000 }),
+        value: 60000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 70000 }),
+        value: 70000,
+    },
+    {
+        label: i18n.global.t('salary.minByYear', { salary: 90000 }),
+        value: 90000,
+    },
 ];

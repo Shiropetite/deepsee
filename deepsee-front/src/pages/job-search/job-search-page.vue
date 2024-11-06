@@ -67,20 +67,20 @@ onUnmounted(() => {
     <div class="laptop search-container">
         <div class="search-content">
             <h1 class="text-center text-white mb-28">
-                Rechercher votre job idéal
+                {{ $t('jobSearchPage.title') }}
             </h1>
 
-            <div class="search row gap-18 mb-12">
+            <div class="search row gap-18 mb-8">
                 <div class="column gap-12 width-100">
                     <text-input
                         v-model="searchFilters.jobTitle"
-                        placeholder="Rechercher un job"
+                        :placeholder="$t('jobSearchPage.jobTitle')"
                     />
 
                     <div class="row gap-12">
                         <text-input
                             v-model="searchFilters.city"
-                            placeholder="Ville"
+                            :placeholder="$t('jobSearchPage.city')"
                         />
 
                         <select-input
@@ -91,12 +91,12 @@ onUnmounted(() => {
 
                         <text-input
                             v-model="searchFilters.companyName"
-                            placeholder="Entreprise"
+                            :placeholder="$t('jobSearchPage.companyName')"
                         />
 
                         <text-input
                             v-model="searchFilters.companySector"
-                            placeholder="Secteur"
+                            :placeholder="$t('jobSearchPage.companySector')"
                         />
 
                         <select-input
@@ -120,7 +120,7 @@ onUnmounted(() => {
             </div>
 
             <div class="row justify-end text-white mr-52">
-                147 jobs trouvés
+                {{ $t("jobSearchPage.jobFound", { count: 5 }) }}
             </div>
         </div>
     </div>
@@ -132,19 +132,19 @@ onUnmounted(() => {
         >
             <text-input
                 v-model="searchFilters.jobTitle"
-                placeholder="Rechercher un job"
+                :placeholder="$t('jobSearchPage.jobTitle')"
             />
         </div>
 
         <div class="row justify-end text-white mr-28">
-            147 jobs trouvés
+            {{ $t("jobSearchPage.jobFound", { count: 5 }) }}
         </div>
     </div>
 
     <div class="row justify-center">
         <div class="list">
             <h2 class="mb-18">
-                Aujourd'hui
+                {{ $t('today') }}
             </h2>
 
             <div
@@ -176,7 +176,7 @@ onUnmounted(() => {
     <popup-component
         :is-open="popupFilterIsOpen"
         :max-width="800"
-        :title="'Filtres de recherche'"
+        :title="$t('jobSearchPage.searchFilter')"
         @close="popupFilterClose"
     >
         <mobile-filter-popup v-model="searchFilters" />

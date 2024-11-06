@@ -1,3 +1,5 @@
+import i18n from 'src/i18n';
+
 /**
  * Formate le salaire en fonction du type de contrat
  * @param job - le job dont on veut formater le salaire
@@ -8,27 +10,31 @@ export const formatSalary = (job: {
     salaryMaxInYear: number;
     salaryMinInYear: number;
 }) => {
-    let salary = '';
-
+    // Par jour
     if (['Freelance', 'Intérim'].includes(job.contract)) {
         const salaryMinInDay = job.salaryMinInYear / 218;
         if (job.salaryMaxInYear) {
             const salaryMaxInDay = job.salaryMaxInYear / 218;
-            salary += `${ salaryMinInDay.toFixed(0) } - ${ salaryMaxInDay.toFixed(0) }`;
+            return i18n.global.t('salary.rangeByDay', {
+                max: salaryMaxInDay.toFixed(0),
+                min: salaryMinInDay.toFixed(0),
+            });
         }
-        else {
-            salary += `> ${ salaryMinInDay.toFixed(0) }`;
-        }
-        salary += ' € / jour';
+
+        return i18n.global.t('salary.minByDay', {
+            salary: salaryMinInDay.toFixed(0),
+        });
     }
-    else {
-        if (job.salaryMaxInYear) {
-            salary += `${job.salaryMinInYear / 1000}K - ${ job.salaryMaxInYear / 1000 }K`;
-        }
-        else {
-            salary += `> ${ job.salaryMinInYear / 1000 }K`;
-        }
-        salary += ' € / an';
+
+    // Par an
+    if (job.salaryMaxInYear) {
+        return i18n.global.t('salary.rangeByYear', {
+            max: job.salaryMaxInYear / 1000,
+            min: job.salaryMinInYear / 1000,
+        });
     }
-    return salary;
+
+    return i18n.global.t('salary.minByYear', {
+        salary: job.salaryMinInYear / 1000,
+    });
 };

@@ -16,13 +16,13 @@ const emit = defineEmits<{
     <div class="popup-content column gap-18">
         <text-input
             :model-value="modelValue.jobTitle"
-            placeholder="Rechercher un job"
+            :placeholder="$t('jobSearchPage.jobTitle')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, jobTitle: $event })"
         />
 
         <text-input
             :model-value="modelValue.city"
-            placeholder="Ville"
+            :placeholder="$t('jobSearchPage.city')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, city: $event })"
         />
 
@@ -34,13 +34,13 @@ const emit = defineEmits<{
 
         <text-input
             :model-value="modelValue.companyName"
-            placeholder="Entreprise"
+            :placeholder="$t('jobSearchPage.companyName')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, companyName: $event })"
         />
 
         <text-input
             :model-value="modelValue.companySector"
-            placeholder="Secteur"
+            :placeholder="$t('jobSearchPage.companySector')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, companySector: $event })"
         />
 
