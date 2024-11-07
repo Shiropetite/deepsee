@@ -23,6 +23,6 @@ app.get('/api', (req, res) => {
     res.send('Hello World!');
 });
 
-app.use('/api/job-offers', jobRouter);
+app.use('/api/jobs', jobRouter);
 
 app.use('/api/files', express.static(path.join(__dirname, '../files')));

@@ -9,6 +9,18 @@ export type SearchJobsFilter = {
 };
 
 export type GetJobsByFiltersResponse = {
+    currentPage: number;
+    data: {
+        older?: GetJobsByFiltersResponseItem[];
+        thisMonth?: GetJobsByFiltersResponseItem[];
+        thisWeek?: GetJobsByFiltersResponseItem[];
+        today?: GetJobsByFiltersResponseItem[];
+    }
+    maxItems: number;
+    maxPages: number;
+}
+
+export type GetJobsByFiltersResponseItem = {
   __id: number;
   _companyId: number;
   city: string;

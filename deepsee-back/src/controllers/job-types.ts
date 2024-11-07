@@ -9,6 +9,13 @@ export type getJobsByFilterQuery = {
 };
 
 export type getJobsByFilterResponse = {
+  older?: getJobsByFilterResponseItem[];
+  thisMonth?: getJobsByFilterResponseItem[];
+  thisWeek?: getJobsByFilterResponseItem[];
+  today?: getJobsByFilterResponseItem[];
+};
+
+type getJobsByFilterResponseItem = {
   __id: number;
   _companyId: number;
   city: string;
@@ -19,7 +26,7 @@ export type getJobsByFilterResponse = {
   salaryMaxInYear: number;
   salaryMinInYear: number;
   title: string;
-}[];
+}
 // #endregion
 
 // #region getJobById

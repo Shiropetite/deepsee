@@ -14,7 +14,7 @@ const expectationDescriptionSeeMore = ref(false);
 defineProps<{
     goToSearch: () => void;
     isLoading: boolean
-    job: GetJobByIdResponse;
+    job: GetJobByIdResponse | null;
 }>();
 
 watch(() => route.fullPath, async () => {

@@ -27,7 +27,7 @@
         "city": "Ville",
         "companyName": "Entreprise",
         "companySector": "Secteur",
-        "jobFound": "{ count } job trouvé | { count } jobs trouvés",
+        "jobFound": "Aucun job trouvé | { count } job trouvé | { count } jobs trouvés",
         "searchFilter" : "Filtres de recherche"
     },
     "legalNotice":"Mentions légales",
@@ -64,6 +64,9 @@
         "minuteAgo": "il y a { count } minute | il y a { count } minutes",
         "secondAgo": "il y a { count } seconde | il y a { count } secondes"
     },
+    "thisWeek": "Cette semaine",
+    "thisMonth": "Ce mois-ci",
+    "older": "Ces 3 derniers mois",
     "today": "Aujourd'hui",
     "yearOfExperience": "{ count } an d'expérience | { count } ans d'expérience"
 }

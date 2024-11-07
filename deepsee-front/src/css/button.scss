@@ -18,11 +18,14 @@ button:hover {
     background-color: #d0dcea;
 }
 
-
 button.border {
     background-color: white;
     border: 2px solid var(--grey);
     color: var(--grey);
+}
+
+button.border:hover {
+    background-color: #d0dcea;
 }
 
 button.icon.small {
@@ -33,6 +36,10 @@ button.active {
     background-color: #D0FBFF;
     color: var(--primary);
     font-weight: 700;
+}
+
+button.active.border {
+    border: 2px solid var(--primary);
 }
 
 button.active:hover {

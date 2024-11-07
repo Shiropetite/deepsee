@@ -4,14 +4,17 @@ import seaShapeComponent from 'src/components/sea-shape-component.vue';
 import { getJobsByFilters } from 'src/services/job-service';
 import { GetJobsByFiltersResponse, SearchJobsFilter } from 'src/services/job-type';
 import { onMounted, onUnmounted, ref, Ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 import mobileFilterPopup from './mobile-filter-popup.vue';
 
 import { contractTypesOptions, minSalaryOptions } from '.';
 
+const route = useRoute();
 const router = useRouter();
 
+const popupFilterIsOpen = ref(false);
+const isLoading = ref(false);
 const searchFilters: Ref<SearchJobsFilter> = ref({
     city: '',
     companyName: '',
@@ -21,13 +24,31 @@ const searchFilters: Ref<SearchJobsFilter> = ref({
     minSalary: '',
 });
 
-const popupFilterIsOpen = ref(false);
-const isLoading = ref(false);
-const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
+const jobs: Ref<GetJobsByFiltersResponse> = ref({
+    currentPage: 1,
+    data: {
+        older: [],
+        thisMonth: [],
+        thisWeek: [],
+        today: [],
+    },
+    maxItems: 0,
+    maxPages: 1,
+});
+
+const changePage = async (page: number) => {
+    await router.replace({ query: { page } });
+    await searchJobs();
+};
 
 const searchJobs = async () => {
+    const page = route.query.page ? Number(route.query.page) : 1;
+    await router.replace({ query: { ...searchFilters.value, page } });
     isLoading.value = true;
-    jobs.value = await getJobsByFilters({ searchFilters: searchFilters.value });
+    jobs.value = await getJobsByFilters({
+        page: page ?? jobs.value.currentPage,
+        searchFilters: searchFilters.value,
+    });
     isLoading.value = false;
 };
 
@@ -47,6 +68,19 @@ const popupFilterClose = async () => {
 };
 
 onMounted(async () => {
+    if (!route.query.page) {
+        await router.replace({ query: { page: 1 } });
+    }
+    if (route.query) {
+        searchFilters.value = {
+            city: route.query.city as string,
+            companyName: route.query.companyName as string,
+            companySector: route.query.companySector as string,
+            contract: route.query.contract as string,
+            jobTitle: route.query.jobTitle as string,
+            minSalary: route.query.minSalary as string,
+        };
+    }
     window.addEventListener('keyup', handleEnter);
     await searchJobs();
 });
@@ -120,7 +154,7 @@ onUnmounted(() => {
             </div>
 
             <div class="row justify-end text-white mr-52">
-                {{ $t("jobSearchPage.jobFound", { count: 5 }) }}
+                {{ $t("jobSearchPage.jobFound", { count: jobs.maxItems }) }}
             </div>
         </div>
     </div>
@@ -137,38 +171,63 @@ onUnmounted(() => {
         </div>
 
         <div class="row justify-end text-white mr-28">
-            {{ $t("jobSearchPage.jobFound", { count: 5 }) }}
+            {{ $t("jobSearchPage.jobFound", { count: jobs.maxItems }) }}
         </div>
     </div>
 
     <div class="row justify-center">
         <div class="list">
-            <h2 class="mb-18">
-                {{ $t('today') }}
-            </h2>
+            <div v-if="isLoading">
+                <h2 class="mb-18">
+                    {{ $t('today') }}
+                </h2>
 
-            <div
-                v-if="isLoading"
-                class="list-job"
-            >
-                <skeleton-card
-                    v-for="index in 9"
-                    :key="index"
-                    width="100%"
-                    height="280px"
-                />
+                <div class="list-job">
+                    <skeleton-card
+                        v-for="index in 9"
+                        :key="index"
+                        width="100%"
+                        height="280px"
+                    />
+                </div>
             </div>
 
             <div
                 v-else
-                class="list-job"
+                class="column gap-28"
             >
-                <job-card
-                    v-for="job in jobs"
-                    :key="job.__id"
-                    :job="job"
-                    @click="goToSelectedJob(job.__id)"
-                />
+                <div
+                    v-for="label in Object.keys(jobs.data)"
+                    :key="label"
+                >
+                    <h2
+                        v-if="jobs.data[label]?.length > 0"
+                        class="mb-18"
+                    >
+                        {{ $t(label) }}
+                    </h2>
+
+                    <div class="list-job">
+                        <job-card
+                            v-for="job in jobs.data[label]"
+                            :key="job.__id"
+                            :job="job"
+                            @click="goToSelectedJob(job.__id)"
+                        />
+                    </div>
+                </div>
+
+                <div class="row justify-center gap-8">
+                    <button
+                        v-for="page in jobs.maxPages"
+                        :key="page"
+                        class="border"
+                        :class="{ active: page === jobs.currentPage }"
+                        @click="changePage(page)"
+                    >
+                        {{ page }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>

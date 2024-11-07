@@ -13,7 +13,7 @@ const route = useRoute();
 
 const listIsLoading = ref(false);
 const jobIsLoading = ref(false);
-const jobs: Ref<GetJobsByFiltersResponse[]> = ref([]);
+const jobs: Ref<GetJobsByFiltersResponse> = ref({});
 const jobSelected: Ref<GetJobByIdResponse | null> = ref(null);
 
 const goToSearch = () => {
@@ -78,33 +78,45 @@ watch(() => route.fullPath, async () => {
                 </div>
 
                 <div class="list-body">
-                    <h2 class="mb-18">
-                        {{ $t("today") }}
-                    </h2>
+                    <div v-if="listIsLoading">
+                        <h2 class="mb-18">
+                            {{ $t('today') }}
+                        </h2>
 
-                    <div
-                        v-if="listIsLoading"
-                        class="column gap-28"
-                    >
-                        <skeleton-card
-                            v-for="index in 8"
-                            :key="index"
-                            height="260px"
-                            width="100%"
-                        />
+                        <div class="list-job">
+                            <skeleton-card
+                                v-for="index in 9"
+                                :key="index"
+                                width="100%"
+                                height="280px"
+                            />
+                        </div>
                     </div>
 
                     <div
                         v-else
                         class="column gap-28"
                     >
-                        <job-card
-                            v-for="job in jobs"
-                            :key="job.__id"
-                            :class="{ active: job.__id === jobSelected?.__id }"
-                            :job="job"
-                            @click="goToJob(job.__id)"
-                        />
+                        <div
+                            v-for="label in Object.keys(jobs)"
+                            :key="label"
+                        >
+                            <h2
+                                v-if="jobs[label]?.length > 0"
+                                class="mb-18"
+                            >
+                                {{ $t(label) }}
+                            </h2>
+
+                            <div class="column gap-18">
+                                <job-card
+                                    v-for="job in jobs[label]"
+                                    :key="job.__id"
+                                    :job="job"
+                                    @click="goToJob(job.__id)"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

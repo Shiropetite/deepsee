@@ -6,6 +6,7 @@ import {
     fetchCompanyLogo,
 } from '../repositories/company/company-repository';
 import {
+    countFetchedJobsByFilters,
     fetchJobById,
     fetchJobsByFilters,
     getJobHardSkills,
@@ -22,11 +23,21 @@ import { getJobByIdResponse, getJobsByFilterQuery, getJobsByFilterResponse } fro
  * @param res - Réponse.
  */
 export const getJobsByFilters = async (req: Request, res: Response): Promise<void> => {
+    const { page = '1', limit = 20 } = req.query as { limit?: number, page?: string };
+    const currentPage = parseInt(page, 10);
     const searchFilters = req.query as getJobsByFilterQuery;
 
-    const jobs = await fetchJobsByFilters({ searchFilters });
+    const maxItems = await countFetchedJobsByFilters({
+        searchFilters,
+    });
 
-    const response = await Promise.all(jobs.map(async (job) => {
+    const jobs = await fetchJobsByFilters({
+        limit,
+        page: currentPage,
+        searchFilters,
+    });
+
+    const jobsWithCompanies = await Promise.all(jobs.map(async (job) => {
         const company = await fetchCompanyById({ companyId: job._companyId });
 
         if (!company) {
@@ -38,9 +49,22 @@ export const getJobsByFilters = async (req: Request, res: Response): Promise<voi
             companyLogo: fetchCompanyLogo({ companyName: company.name }),
             companyName: company.name,
         };
-    })) as getJobsByFilterResponse;
+    }));
 
-    res.json(response);
+    const response = jobsWithCompanies.reduce((acc: any, job: any) => {
+        (acc[job.dateRange] = acc[job.dateRange] || []).push({
+            ...job,
+            dateRange: undefined,
+        });
+        return acc;
+    }, {}) as getJobsByFilterResponse;
+
+    res.json({
+        currentPage: currentPage,
+        data: response,
+        maxItems,
+        maxPages: Math.ceil(maxItems / limit),
+    });
 };
 
 /**

@@ -14,11 +14,14 @@ import {
  * @param queryResult - JobDB
  * @returns Job
  */
-export const parseJob = ({ queryResult }: { queryResult: JobDB }): Job => ({
+export const parseJob = (
+    { queryResult }: { queryResult: JobDB & { date_range?: string } }
+): Job & { dateRange?: string } => ({
     __id: queryResult.id,
     _companyId: queryResult.company_id,
     city: queryResult.city,
     contract: queryResult.contract,
+    dateRange: queryResult.date_range,
     dayOfRemoteWork: queryResult.day_of_remote_work,
     expectationDescription: queryResult.expectation_description,
     experienceMinInYear: queryResult.experience_min_in_year,

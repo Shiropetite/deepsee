@@ -8,9 +8,19 @@ import { GetJobByIdResponse, GetJobsByFiltersResponse, SearchJobsFilter } from '
  * @returns Les offres d'emploi
  */
 export const getJobsByFilters = async (
-    { searchFilters }: { searchFilters: SearchJobsFilter },
-): Promise<GetJobsByFiltersResponse[]> => {
-    const response = await api.get('/job-offers', { params: searchFilters });
+    {
+        page,
+        searchFilters,
+    }: {
+        page: number,
+        searchFilters: SearchJobsFilter,
+    },
+): Promise<GetJobsByFiltersResponse> => {
+    const response = await api.get('/jobs', { params: {
+        ...searchFilters,
+        limit: 20,
+        page,
+    } });
     return response.data;
 };
 
@@ -20,6 +30,6 @@ export const getJobsByFilters = async (
  * @returns L'offre d'emploi
  */
 export const getJobById = async ({ id }: { id: number }): Promise<GetJobByIdResponse> => {
-    const response = await api.get(`/job-offers/${id}`);
+    const response = await api.get(`/jobs/${id}`);
     return response.data;
 };
