@@ -2,7 +2,7 @@
 import jobCard from 'src/components/job-card-component.vue';
 import seaShapeComponent from 'src/components/sea-shape-component.vue';
 import { getJobById, getJobsByFilters } from 'src/services/job-service';
-import { GetJobByIdResponse, GetJobsByFiltersResponse } from 'src/services/job-type';
+import { GetJobByIdResponse, GetJobsByFiltersResponse, getJobsByFiltersKey, SearchJobsFilter } from 'src/services/job-type';
 import { onMounted, ref, Ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -11,30 +11,80 @@ import jobDetailBodyComponent from './job-detail-body-component.vue';
 const router = useRouter();
 const route = useRoute();
 
+const currentPage = ref(route.query.page ? parseInt(route.query.page as string) : 1);
+const jobsKey = ref(getJobsByFiltersKey);
+
 const listIsLoading = ref(false);
 const jobIsLoading = ref(false);
-const jobs: Ref<GetJobsByFiltersResponse> = ref({});
 const jobSelected: Ref<GetJobByIdResponse | null> = ref(null);
+const jobs: Ref<GetJobsByFiltersResponse> = ref({
+    currentPage: 1,
+    data: {
+        older: [],
+        thisMonth: [],
+        thisWeek: [],
+        today: [],
+    },
+    maxItems: 0,
+    maxPages: 1,
+});
+const searchFilters: Ref<SearchJobsFilter> = ref({
+    city: '',
+    companyName: '',
+    companySector: '',
+    contract: '',
+    jobTitle: '',
+    minSalary: '',
+});
 
 const goToSearch = () => {
-    router.push({ name: 'search' });
+    router.push({ name: 'search', query: { ...searchFilters.value, page: 1 } });
 };
 
 const goToJob = (id: number) => {
-    router.push({ name: 'job-detail', params: { id } });
+    router.push({ name: 'job-detail', params: { id }, query: { ...searchFilters.value, page: route.query.page } });
 };
 
 const searchJobs = async () => {
     listIsLoading.value = true;
-    jobs.value = await getJobsByFilters({ searchFilters: {
-        city: '',
-        companyName: '',
-        companySector: '',
-        contract: '',
-        jobTitle: '',
-        minSalary: '',
-    } });
+    const response = await getJobsByFilters({
+        page: currentPage.value,
+        searchFilters: searchFilters.value,
+    });
+
+    jobs.value = {
+        ...jobs.value,
+        ...response,
+        data: {
+            older: [
+                ...(jobs.value.data?.older ?? []),
+                ...(response.data?.older ?? []),
+            ],
+            thisMonth: [
+                ...(jobs.value.data?.thisMonth ?? []),
+                ...(response.data?.thisMonth ?? []),
+            ],
+            thisWeek: [
+                ...(jobs.value.data?.thisWeek ?? []),
+                ...(response.data?.thisWeek ?? []),
+            ],
+            today: [
+                ...(jobs.value.data?.today ?? []),
+                ...(response.data?.today ?? []),
+            ],
+        },
+    };
+
+    jobsKey.value = getJobsByFiltersKey.filter(
+        (key) => Object.keys(jobs.value.data[key] ?? {}).length > 0,
+    );
+
     listIsLoading.value = false;
+};
+
+const loadMoreJobs = () => {
+    currentPage.value += 1;
+    searchJobs();
 };
 
 const getSelectedJob = async () => {
@@ -45,6 +95,16 @@ const getSelectedJob = async () => {
 };
 
 onMounted(async () => {
+    if (Object.keys(route.query).length > 0) {
+        searchFilters.value = {
+            city: route.query.city as string,
+            companyName: route.query.companyName as string,
+            companySector: route.query.companySector as string,
+            contract: route.query.contract as string,
+            jobTitle: route.query.jobTitle as string,
+            minSalary: route.query.minSalary ? parseInt(route.query.minSalary as string) : '',
+        };
+    }
     await searchJobs();
     await getSelectedJob();
 });
@@ -98,11 +158,11 @@ watch(() => route.fullPath, async () => {
                         class="column gap-28"
                     >
                         <div
-                            v-for="label in Object.keys(jobs)"
+                            v-for="label in jobsKey"
                             :key="label"
                         >
                             <h2
-                                v-if="jobs[label]?.length > 0"
+                                v-if="jobs.data[label]?.length > 0"
                                 class="mb-18"
                             >
                                 {{ $t(label) }}
@@ -110,12 +170,23 @@ watch(() => route.fullPath, async () => {
 
                             <div class="column gap-18">
                                 <job-card
-                                    v-for="job in jobs[label]"
+                                    v-for="job in jobs.data[label]"
                                     :key="job.__id"
                                     :job="job"
+                                    :class="{ active: jobSelected?.__id === job.__id }"
                                     @click="goToJob(job.__id)"
                                 />
                             </div>
+                        </div>
+
+                        <div class="row justify-center gap-8">
+                            <button
+                                v-if="currentPage < jobs.maxPages"
+                                class="primary"
+                                @click="loadMoreJobs()"
+                            >
+                                {{ $t("getMoreJobs") }}
+                            </button>
                         </div>
                     </div>
                 </div>

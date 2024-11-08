@@ -5,8 +5,10 @@ export type SearchJobsFilter = {
   companySector: string;
   contract: string;
   jobTitle: string;
-  minSalary: string;
+  minSalary: string | number;
 };
+
+export const getJobsByFiltersKey = ['today', 'thisWeek', 'thisMonth', 'older'];
 
 export type GetJobsByFiltersResponse = {
     currentPage: number;

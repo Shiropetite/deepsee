@@ -36,13 +36,7 @@ const jobs: Ref<GetJobsByFiltersResponse> = ref({
     maxPages: 1,
 });
 
-const changePage = async (page: number) => {
-    await router.replace({ query: { page } });
-    await searchJobs();
-};
-
-const searchJobs = async () => {
-    const page = route.query.page ? Number(route.query.page) : 1;
+const searchJobs = async ({ page = 1 }: { page?: number }) => {
     await router.replace({ query: { ...searchFilters.value, page } });
     isLoading.value = true;
     jobs.value = await getJobsByFilters({
@@ -53,36 +47,33 @@ const searchJobs = async () => {
 };
 
 const goToSelectedJob = (id: number) => {
-    router.push({ name: 'job-detail', params: { id } });
+    router.push({ name: 'job-detail', params: { id }, query: { ...searchFilters.value, page: jobs.value.currentPage } });
 };
 
 const handleEnter = async (event) => {
     if (event.key === 'Enter') {
-        await searchJobs();
+        await searchJobs({});
     }
 };
 
 const popupFilterClose = async () => {
     popupFilterIsOpen.value = false;
-    await searchJobs();
+    await searchJobs({});
 };
 
 onMounted(async () => {
-    if (!route.query.page) {
-        await router.replace({ query: { page: 1 } });
-    }
-    if (route.query) {
+    if (Object.keys(route.query).length > 0) {
         searchFilters.value = {
             city: route.query.city as string,
             companyName: route.query.companyName as string,
             companySector: route.query.companySector as string,
             contract: route.query.contract as string,
             jobTitle: route.query.jobTitle as string,
-            minSalary: route.query.minSalary as string,
+            minSalary: route.query.minSalary ? parseInt(route.query.minSalary as string) : '',
         };
     }
     window.addEventListener('keyup', handleEnter);
-    await searchJobs();
+    await searchJobs({ page: route.query.page ? parseInt(route.query.page as string) : 1 });
 });
 
 onUnmounted(() => {
@@ -143,7 +134,7 @@ onUnmounted(() => {
 
                 <button
                     class="primary bubble"
-                    @click="searchJobs"
+                    @click="searchJobs({})"
                 >
                     <search-icon
                         :height="38"
@@ -223,7 +214,7 @@ onUnmounted(() => {
                         :key="page"
                         class="border"
                         :class="{ active: page === jobs.currentPage }"
-                        @click="changePage(page)"
+                        @click="searchJobs({ page })"
                     >
                         {{ page }}
                     </button>
