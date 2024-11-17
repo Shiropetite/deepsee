@@ -14,6 +14,10 @@ button {
     width: fit-content;
 }
 
+a:has(button) {
+    text-decoration: none !important;
+}
+
 button:hover {
     background-color: #d0dcea;
 }

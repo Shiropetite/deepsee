@@ -3,35 +3,57 @@
         <img src="/logo-footer.svg">
 
         <div class="row gap-8">
-            <button class="secondary">
-                {{ $t("legalNotice") }}
-            </button>
-            <button class="secondary">
-                {{ $t("privacyPolicy") }}
-            </button>
-            <button class="secondary">
-                {{ $t("termOfUse") }}
-            </button>
-            <button class="secondary">
-                {{ $t("contact") }}
-            </button>
+            <router-link :to="{ name: 'legal-notice' }">
+                <button class="secondary">
+                    {{ $t("legalNotice") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'privacy-policy' }">
+                <button class="secondary">
+                    {{ $t("privacyPolicy") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'term-of-use' }">
+                <button class="secondary">
+                    {{ $t("termOfUse") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'contact' }">
+                <button class="secondary">
+                    {{ $t("contact") }}
+                </button>
+            </router-link>
         </div>
     </div>
 
     <div class="mobile footer footer-mobile">
         <div class="column">
-            <button class="secondary small">
-                {{ $t("legalNotice") }}
-            </button>
-            <button class="secondary small">
-                {{ $t("privacyPolicy") }}
-            </button>
-            <button class="secondary small">
-                {{ $t("termOfUse") }}
-            </button>
-            <button class="secondary small">
-                {{ $t("contact") }}
-            </button>
+            <router-link :to="{ name: 'legal-notice' }">
+                <button class="secondary small">
+                    {{ $t("legalNotice") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'privacy-policy' }">
+                <button class="secondary small">
+                    {{ $t("privacyPolicy") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'term-of-use' }">
+                <button class="secondary small">
+                    {{ $t("termOfUse") }}
+                </button>
+            </router-link>
+
+            <router-link :to="{ name: 'contact' }">
+                <button class="secondary small">
+                    {{ $t("contact") }}
+                </button>
+            </router-link>
         </div>
 
         <div class="row justify-center">

@@ -2,8 +2,15 @@
     "account": "Compte",
     "apply": "Postuler",
     "backHome": "Retour à l'accueil",
+    "company": "Entreprise",
+    "companyAdvantages": "Avantages de l'entreprise",
+    "companyDescription": "Description de l'entreprise",
     "contact": "Contact",
-    "getMoreJobs": "Voir plus d'offres",
+    "contactPage": {
+        "confidentiality": "Nous respectons la confidentialité de vos données. Les informations que vous nous envoyez ne seront utilisées que pour répondre à votre demande et ne seront pas partagées.",
+        "email": "Vous pouvez nous envoyer un e-mail à l'adresse suivante : {email}",
+        "introduction": "Si vous avez des questions ou des demandes, n'hésitez pas à nous contacter en utilisant les informations ci-dessous."
+    },
     "contractType": {
         "all": "Tout les contrats",
         "permanent": "CDI",
@@ -13,13 +20,14 @@
         "temporary": "Intérim",
         "workStudy": "Alternance"
     },
-    "company": "Entreprise",
-    "companyAdvantages": "Avantages de l'entreprise",
-    "companyDescription": "Description de l'entreprise",
     "dayOfRemoteWork": "Présentiel | { count } jour de télétravail / semaine | { count } jours de télétravail / semaine",
+    "editor": "Editeur",
     "expectationsDescription": "Description des attentes",
     "favorite": "Favoris",
+    "getMoreJobs": "Voir plus d'offres",
     "goBack": "Retour",
+    "host": "Hébergeur",
+    "introduction": "Introduction",
     "job": "Job",
     "jobDescription": "Description de l'offre",
     "jobSearchPage": {
@@ -32,6 +40,14 @@
         "searchFilter" : "Filtres de recherche"
     },
     "legalNotice":"Mentions légales",
+    "legalNoticePage": {
+        "contact": "Contact: {email}",
+        "host": "Ce site est hébergé par OVH. ({link})",
+        "hostAdress": "Siège social: 2 rue Kellermann - 59100 Roubaix - France.",
+        "hostInfo": "OVH SAS au capital de 10 069 020 € RCS Lille Métropole 424 761 419 00045",
+        "hostUrl": "http://www.ovh.com",
+        "owner": "Ce site est édité par Sofia DA SILVA RIBEIRO."
+    },
     "minSalaryOptions": {
         "none": "Aucun salaire minimum"
     },
@@ -39,6 +55,9 @@
     "oops": "Oups !",
     "pageNotFound": "La page que vous recherchez n'existe pas.",
     "privacyPolicy": "Politique de confidentialité",
+    "privacyPolicyPage": {
+        "content": "Ce site ne collecte aucune donnée personnelle. Toutefois, il est possible que des informations techniques, telles que l'adresse IP, soient collectées par notre hébergeur pour des raisons de maintenance et de sécurité. Nous n'avons aucun accès à ces données."
+    },
     "recruitmentSteps": "Étapes de recrutement",
     "salary": {
         "minByDay": "> { salary } € / jour",
@@ -57,6 +76,25 @@
     "summary": "Résumé",
     "teamDescription": "Descriptif de l'équipe",
     "termOfUse": "CGU",
+    "termOfUsePage": {
+        "amendmentsTitle": "Modifications des CGU",
+        "amendments": "Nous nous réservons le droit de modifier les présentes CGU à tout moment. Les modifications seront publiées sur le site et seront applicables dès leur mise en ligne.",
+        "contact": "Pour toute question relative aux présentes CGU, vous pouvez nous contacter à l'adresse suivante: {email}",
+        "externalLinksTitle": "Liens externes",
+        "externalLinks": "Ce site peut contenir des liens vers des sites tiers. Nous ne sommes pas responsables du contenu de ces sites et leur utilisation est à vos propres risques.",
+        "intellectualPropertyTitle": "Propriété intellectuelle",
+        "intellectualProperty": "Le contenu de ce site est protégé par les lois sur la propriété intellectuelle. Toute reproduction, représentation, modification ou diffusion de tout ou partie du contenu sans autorisation préalable est interdite.",
+        "introduction": "Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation de ce site. En accédant à ce site, l'utilisateur accepte sans réserve les termes de ces CGU.",
+        "lawTitle": "Droit applicable et juridiction compétente",
+        "law": "Les présentes CGU sont régies par le droit français. En cas de litige, les tribunaux français seront compétents.",
+        "liabilityTitle": "Responsabilité",
+        "liability": "L'éditeur ne peut être tenu responsable des dommages directs ou indirects causés par l'utilisation du site, notamment en cas de perte de données, de panne technique ou d'indisponibilité du site.",
+        "siteAccessTitle": "Accès au site",
+        "siteAccess": "L'accès au site est accessible gratuitement à toute personne disposant d'un accès à Internet. L'éditeur du site se réserve le droit de suspendre ou d'interrompre l'accès au site à tout moment, sans préavis.",
+        "siteUseTitle": "Utilisation du site",
+        "siteUse": "L'utilisateur s'engage à utiliser le site dans le respect des lois en vigueur. Il est interdit d'utiliser ce site à des fins illégales ou de perturber son fonctionnement.",
+        "title": "Conditions générales d’utilisation"
+    },
     "time": {
         "yearAgo": "il y a { count } an | il y a { count } ans",
         "monthAgo": "il y a { count } mois | il y a { count } mois",

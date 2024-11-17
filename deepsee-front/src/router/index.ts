@@ -14,6 +14,26 @@ const routes: RouteRecordRaw[] = [
                 name: 'job-detail',
                 path: '/job/:id',
             },
+            {
+                component: () => import('../pages/legal-notice-page.vue'),
+                name: 'legal-notice',
+                path: '/legal-notice',
+            },
+            {
+                component: () => import('../pages/privacy-policy-page.vue'),
+                name: 'privacy-policy',
+                path: '/privacy-policy',
+            },
+            {
+                component: () => import('../pages/term-of-use-page.vue'),
+                name: 'term-of-use',
+                path: '/term-of-use',
+            },
+            {
+                component: () => import('../pages/contact-page.vue'),
+                name: 'contact',
+                path: '/contact',
+            },
         ],
         component: () => import('../layouts/main-layout.vue'),
         path: '/',

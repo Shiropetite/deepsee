@@ -12,7 +12,16 @@ body {
 }
 
 .page {
-    margin: 28px 80px;
+    margin: 28px;
+    padding-top: 80px;
+    min-height: calc(100vh - 218px);
+}
+
+@media (max-width: 900px) {
+    .page {
+        padding-top: 0px !important;
+        min-height: calc(100vh - 350px);
+    }
 }
 
 .width-100 {
@@ -40,5 +49,8 @@ body {
 }
 
 a {
-    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
 }
