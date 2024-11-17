@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import contact from 'src/config/contact';
+</script>
+
 <template>
     <div class="page column gap-28">
         <h1>
@@ -90,7 +94,7 @@
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.contact', { email: $t('contactInfo.email') }) }}
+                {{ $t('termOfUsePage.contact', { email: contact.email }) }}
             </div>
         </div>
     </div>

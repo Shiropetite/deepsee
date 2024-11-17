@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import contact from 'src/config/contact';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -26,7 +27,7 @@ const getHostUrl = () => {
                     {{ $t("legalNoticePage.owner") }}
                 </div>
                 <div>
-                    {{ $t("legalNoticePage.contact", { email: $t('contactInfo.email') }) }}
+                    {{ $t("legalNoticePage.contact", { email: contact.email }) }}
                 </div>
             </div>
         </div>

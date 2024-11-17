@@ -6,7 +6,7 @@ import searchIcon from './components/icons/search-icon.vue';
 import popupComponent from './components/popup-component.vue';
 import selectInput from './components/select-input-component.vue';
 import skeletonCard from './components/skeleton-card-component.vue';
-import i18n from './i18n';
+import i18n from './config/i18n';
 import router from './router';
 
 import './css/global.scss';

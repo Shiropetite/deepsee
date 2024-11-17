@@ -1,4 +1,4 @@
-import i18n from 'src/i18n';
+import i18n from 'src/config/i18n';
 
 /**
  * Formate le salaire en fonction du type de contrat

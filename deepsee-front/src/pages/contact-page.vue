@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import contact from 'src/config/contact';
+</script>
+
 <template>
     <div class="page">
         <h1 class="mb-28">
@@ -10,7 +14,7 @@
             </div>
 
             <div>
-                {{ $t('contactPage.email', { email: $t('contactInfo.email') }) }}
+                {{ $t('contactPage.email', { email: contact.email }) }}
             </div>
 
             <div>
