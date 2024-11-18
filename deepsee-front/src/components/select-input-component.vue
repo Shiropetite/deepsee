@@ -49,6 +49,7 @@ const getLabel = (value: string) => {
 
         <button
             class="select-input row align-center justify-between"
+            :aria-label="getLabel(modelValue)"
             @click="clickOnInput()"
             @focusout="onBlur()"
         >
@@ -56,7 +57,10 @@ const getLabel = (value: string) => {
                 {{ getLabel(modelValue) }}
             </div>
 
-            <img src="/icons/arrow-down-icon.svg">
+            <img
+                alt="arrow-down-icon"
+                src="/icons/arrow-down-icon.svg"
+            >
         </button>
 
         <div
@@ -73,9 +77,10 @@ const getLabel = (value: string) => {
                 <div class="row align-center gap-8">
                     <img
                         v-if="option.icon"
+                        :alt="option.icon"
                         :src="option.icon"
-                        width="16"
                         height="16"
+                        width="16"
                     >
                     <div>{{ option.label }}</div>
                 </div>

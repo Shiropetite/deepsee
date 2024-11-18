@@ -2,6 +2,8 @@
     "account": "Compte",
     "apply": "Postuler",
     "backHome": "Retour à l'accueil",
+    "clear": "Effacer",
+    "close": "Fermer",
     "company": "Entreprise",
     "companyAdvantages": "Avantages de l'entreprise",
     "companyDescription": "Description de l'entreprise",
@@ -29,6 +31,7 @@
     "host": "Hébergeur",
     "introduction": "Introduction",
     "job": "Job",
+    "jobName": "Job {name}",
     "jobDescription": "Description de l'offre",
     "jobSearchPage": {
         "title": "Rechercher votre job idéal",

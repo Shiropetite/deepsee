@@ -1,15 +1,15 @@
 <template>
     <div class="mobile mobile-menu-container">
         <div class="mobile-menu row">
-            <button class="active width-100">
+            <button class="button active width-100">
                 {{ $t("job") }}
             </button>
 
-            <button class="width-100">
+            <button class="button width-100">
                 {{ $t("company") }}
             </button>
 
-            <button class="width-100">
+            <button class="button width-100">
                 {{ $t("company") }}
             </button>
         </div>

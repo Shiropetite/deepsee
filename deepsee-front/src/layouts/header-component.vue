@@ -5,33 +5,38 @@
 <template>
     <div class="laptop header-container row justify-between">
         <div class="header row align-center gap-8">
-            <router-link to="/">
-                <button class="logo">
-                    <img src="/logo.svg">
-                </button>
+            <router-link
+                class="button logo"
+                aria-label="Go to home page"
+                to="/"
+            >
+                <img
+                    alt="deepsee-logo"
+                    src="/logo.svg"
+                >
             </router-link>
 
             <div class="separator" />
 
-            <button class="active">
+            <button class="button active">
                 {{ $t("searchJob") }}
             </button>
 
             <div class="separator" />
 
-            <button>
+            <button class="button">
                 {{ $t("searchCompany") }}
             </button>
         </div>
 
         <div class="header row align-center gap-8">
-            <button>
+            <button class="button">
                 {{ $t("signUp") }}
             </button>
 
             <div class="separator" />
 
-            <button class="primary">
+            <button class="button primary">
                 {{ $t("signIn") }}
             </button>
         </div>
@@ -63,7 +68,7 @@
     width: 1px;
 }
 
-button.logo {
+.button.logo {
     padding: 3px 12px 3px 3px;
 }
 </style>

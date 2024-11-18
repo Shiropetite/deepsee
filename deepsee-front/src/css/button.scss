@@ -1,4 +1,4 @@
-button {
+.button {
     align-items: center;
     background-color: white;
     border: none;
@@ -10,79 +10,76 @@ button {
     font-size: 14px;
     font-weight: 600;
     padding: 12px 18px;
+    text-decoration: none;
     transition: background-color 0.2s;
     width: fit-content;
 }
 
-a:has(button) {
-    text-decoration: none !important;
-}
-
-button:hover {
+.button:hover {
     background-color: #d0dcea;
 }
 
-button.border {
+.button.border {
     background-color: white;
     border: 2px solid var(--grey);
     color: var(--grey);
 }
 
-button.border:hover {
+.button.border:hover {
     background-color: #d0dcea;
 }
 
-button.icon.small {
+.button.icon.small {
     padding: 2px !important;
 }
 
-button.active {
+.button.active {
     background-color: #D0FBFF;
     color: var(--primary);
     font-weight: 700;
 }
 
-button.active.border {
+.button.active.border {
     border: 2px solid var(--primary);
 }
 
-button.active:hover {
+.button.active:hover {
     background-color: #D0FBFF;
 }
 
 // Background primary
-button.primary {
+.button.primary {
     background-color: var(--primary);
     border: 2px solid var(--primary);
     color: white;
 }
 
-button.primary:hover {
+.button.primary:hover {
     background-color: #0098b6;
 }
 
-button.primary.border {
+.button.primary.border {
     background-color: white;
     border: 2px solid var(--primary);
     color: var(--primary);
 }
 
-button.primary.border:hover {
+.button.primary.border:hover {
     background-color: #eff4f9;
 }
 
 // Background secondary
-button.secondary {
+.button.secondary {
     background-color: var(--secondary);
     border: 2px solid var(--secondary);
     color: white;
 }
 
-button.secondary:hover {
+.button.secondary:hover {
     background-color: #061432;
 }
 
-button.round {
+.button.round {
     align-items: center;
     border-radius: 30px;
     display: flex;
@@ -91,7 +88,7 @@ button.round {
 }
 
 
-button.rounded {
+.button.rounded {
     align-items: center;
     border-radius: 30px;
     display: flex;
@@ -99,25 +96,25 @@ button.rounded {
     padding: 8px 12px;
 }
 
-button.label-icon {
+.button.label-icon {
     padding: 8px 18px 8px 12px;
 }
 
-button.bubble {
+.button.bubble {
     border-radius: 8px 100px 100px 100px;
 }
 
-button.small {
+.button.small {
     font-size: 12px;
     padding: 8px 12px;
 }
 
 @media (max-width: 900px) {
-    button {
+    .button {
         font-size: 12px !important;
     }
 
-    button img {
+    .button img {
         height: 20px;
         width: 20px;
     }

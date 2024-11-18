@@ -26,9 +26,11 @@ const onChange = (event: Event) => {
         <button
             v-if="modelValue.length > 0"
             class="border round icon small"
+            :aria-label="$t('clear')"
             @click="emit('update:modelValue', '')"
         >
             <img
+                alt="close-icon"
                 src="/icons/close-icon.svg"
                 width="18"
             >

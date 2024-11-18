@@ -133,7 +133,8 @@ onUnmounted(() => {
                 </div>
 
                 <button
-                    class="primary bubble"
+                    class="button primary bubble"
+                    :aria-label="$t('searchJob')"
                     @click="searchJobs({})"
                 >
                     <search-icon
@@ -212,7 +213,7 @@ onUnmounted(() => {
                     <button
                         v-for="page in jobs.maxPages"
                         :key="page"
-                        class="border"
+                        class="button border"
                         :class="{ active: page === jobs.currentPage }"
                         @click="searchJobs({ page })"
                     >
@@ -293,7 +294,7 @@ onUnmounted(() => {
     padding: 18px 18px 18px 38px;
 }
 
-button.bubble {
+.button.bubble {
     height: 100px;
     width: 100px;
 }

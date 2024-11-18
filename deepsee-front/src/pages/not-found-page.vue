@@ -22,10 +22,11 @@ import mobileMenu from 'src/layouts/mobile-menu-component.vue';
             </div>
         </div>
 
-        <router-link to="/">
-            <button class="primary">
-                {{ $t('backHome') }}
-            </button>
+        <router-link
+            class="button primary"
+            to="/"
+        >
+            {{ $t('backHome') }}
         </router-link>
     </div>
 

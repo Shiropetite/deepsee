@@ -129,10 +129,14 @@ watch(() => route.fullPath, async () => {
             <div class="list">
                 <div class="list-header">
                     <button
-                        class="primary label-icon round row gap-8"
+                        class="button primary label-icon round row gap-8"
+                        :aria-label="$t('goBack')"
                         @click="goToSearch"
                     >
-                        <img src="/icons/arrow-left-icon.png">
+                        <img
+                            alt="arrow-left-icon"
+                            src="/icons/arrow-left-icon.png"
+                        >
                         <div>{{ $t('goBack') }}</div>
                     </button>
                 </div>
@@ -182,7 +186,8 @@ watch(() => route.fullPath, async () => {
                         <div class="row justify-center gap-8">
                             <button
                                 v-if="currentPage < jobs.maxPages"
-                                class="primary"
+                                class="button primary"
+                                :aria-label="$t('getMoreJobs')"
                                 @click="loadMoreJobs()"
                             >
                                 {{ $t("getMoreJobs") }}

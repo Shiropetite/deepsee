@@ -17,10 +17,14 @@ defineProps<{
 </script>
 
 <template>
-    <div class="card bubble">
+    <button
+        class="card bubble"
+        :aria-label="$t('jobName', { name: job.title })"
+    >
         <div class="row align-center gap-18 mb-18">
             <img
                 class="logo"
+                :alt="'logo ' + job.companyName"
                 :src="job.companyLogo"
             >
             <div>
@@ -44,7 +48,7 @@ defineProps<{
                 {{ formatSalary(job) }}
             </div>
         </div>
-    </div>
+    </button>
 </template>
 
 <style lang="scss">

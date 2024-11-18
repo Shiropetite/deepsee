@@ -40,10 +40,14 @@ watch(() => route.fullPath, async () => {
             <div class="detail-header">
                 <div class="row justify-between align-center gap-8 mb-12">
                     <button
-                        class="primary icon round row gap-8 mobile"
+                        class="button primary icon round row gap-8 mobile"
+                        :aria-label="$t('goBack')"
                         @click="goToSearch"
                     >
-                        <img src="/icons/arrow-left-icon.png">
+                        <img
+                            alt="arrow-left-icon"
+                            src="/icons/arrow-left-icon.png"
+                        >
                     </button>
 
                     <div class="mobile">
@@ -55,6 +59,7 @@ watch(() => route.fullPath, async () => {
                     <div class="row gap-28 align-center">
                         <img
                             class="logo"
+                            alt="company-logo"
                             :src="job.companyLogo"
                         >
 
@@ -75,13 +80,19 @@ watch(() => route.fullPath, async () => {
                 </div>
 
                 <div class="row justify-end gap-8">
-                    <button class="primary round label-icon row gap-8">
-                        <img src="/icons/send-icon.png">
+                    <button class="button primary round label-icon row gap-8">
+                        <img
+                            alt="send-icon"
+                            src="/icons/send-icon.png"
+                        >
                         <div>{{ $t("apply") }}</div>
                     </button>
 
-                    <button class="secondary round label-icon row gap-8">
-                        <img src="/icons/favorite-icon.png">
+                    <button class="button secondary round label-icon row gap-8">
+                        <img
+                            alt="favorite-icon"
+                            src="/icons/favorite-icon.png"
+                        >
                         <div>{{ $t("favorite") }}</div>
                     </button>
                 </div>
@@ -146,7 +157,7 @@ watch(() => route.fullPath, async () => {
                 <div class="row justify-end">
                     <button
                         v-if="!companyDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="companyDescriptionSeeMore = true"
                     >
                         {{ $t("seeMore") }}
@@ -154,7 +165,7 @@ watch(() => route.fullPath, async () => {
 
                     <button
                         v-if="companyDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="companyDescriptionSeeMore = false"
                     >
                         {{ $t("seeLess") }}
@@ -177,7 +188,7 @@ watch(() => route.fullPath, async () => {
                 <div class="row justify-end">
                     <button
                         v-if="!jobDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="jobDescriptionSeeMore = true"
                     >
                         {{ $t("seeMore") }}
@@ -185,7 +196,7 @@ watch(() => route.fullPath, async () => {
 
                     <button
                         v-if="jobDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="jobDescriptionSeeMore = false"
                     >
                         {{ $t("seeLess") }}
@@ -224,7 +235,7 @@ watch(() => route.fullPath, async () => {
                 <div class="row justify-end">
                     <button
                         v-if="!expectationDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="expectationDescriptionSeeMore = true"
                     >
                         {{ $t("seeMore") }}
@@ -232,7 +243,7 @@ watch(() => route.fullPath, async () => {
 
                     <button
                         v-if="expectationDescriptionSeeMore"
-                        class="secondary small"
+                        class="button secondary small"
                         @click="expectationDescriptionSeeMore = false"
                     >
                         {{ $t("seeLess") }}

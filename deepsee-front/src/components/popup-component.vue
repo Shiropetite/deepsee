@@ -62,11 +62,13 @@ const closePopup = (e: Event) => {
                 <h2>{{ title }}</h2>
 
                 <button
-                    class="icon small"
+                    class="button icon small"
+                    :aria-label="$t('close')"
                     @click="emit('close')"
                 >
                     <img
                         class="close-icon"
+                        alt="close-icon"
                         src="/icons/close-icon.svg"
                     >
                 </button>
