@@ -1,5 +1,6 @@
 {
     "account": "Compte",
+    "applications": "Candidatures",
     "apply": "Postuler",
     "backHome": "Retour à l'accueil",
     "clear": "Effacer",
@@ -24,8 +25,11 @@
     },
     "dayOfRemoteWork": "Présentiel | { count } jour de télétravail / semaine | { count } jours de télétravail / semaine",
     "editor": "Editeur",
+    "email": "Email",
     "expectationsDescription": "Description des attentes",
     "favorite": "Favoris",
+    "firstName": "Prénom",
+    "forgottenPassword": "Mot de passe oublié",
     "getMoreJobs": "Voir plus d'offres",
     "goBack": "Retour",
     "host": "Hébergeur",
@@ -42,6 +46,7 @@
         "jobFound": "Aucun job trouvé | { count } job trouvé | { count } jobs trouvés",
         "searchFilter" : "Filtres de recherche"
     },
+    "lastName": "Nom",
     "legalNotice":"Mentions légales",
     "legalNoticePage": {
         "contact": "Contact: {email}",
@@ -54,9 +59,11 @@
     "minSalaryOptions": {
         "none": "Aucun salaire minimum"
     },
+    "myAccount": "Mon compte",
     "nbEmployee": "{ count } employé | { count } employés",
     "oops": "Oups !",
     "pageNotFound": "La page que vous recherchez n'existe pas.",
+    "password": "Mot de passe",
     "privacyPolicy": "Politique de confidentialité",
     "privacyPolicyPage": {
         "content": "Ce site ne collecte aucune donnée personnelle. Toutefois, il est possible que des informations techniques, telles que l'adresse IP, soient collectées par notre hébergeur pour des raisons de maintenance et de sécurité. Nous n'avons aucun accès à ces données."
@@ -73,7 +80,10 @@
     "seeLess": "Voir moins",
     "seeMore": "Voir plus",
     "signIn": "Se connecter",
+    "signInBtn": "Connexion",
+    "signOut": "Se déconnecter",
     "signUp": "S'inscrire",
+    "signUpBtn": "Créer mon compte",
     "skills": "Compétences",
     "softSkills": "Traits recherchés",
     "summary": "Résumé",

@@ -1,17 +1,41 @@
+<script lang="ts" setup>
+import { useAuthStore } from 'src/store/auth-store';
+
+const authStore = useAuthStore();
+</script>
+
 <template>
     <div class="mobile mobile-menu-container">
         <div class="mobile-menu row">
-            <button class="button active width-100">
+            <router-link
+                :to="{ name: 'search' }"
+                :class="{ 'active': $route.name === 'search' }"
+                class="button width-100"
+            >
                 {{ $t("job") }}
-            </button>
+            </router-link>
 
             <button class="button width-100">
                 {{ $t("company") }}
             </button>
 
-            <button class="button width-100">
-                {{ $t("company") }}
-            </button>
+            <router-link
+                v-if="authStore.token"
+                :to="{ name: 'account' }"
+                :class="{ 'active': $route.name === 'account' }"
+                class="button width-100"
+            >
+                {{ $t("account") }}
+            </router-link>
+
+            <router-link
+                v-else
+                :to="{ name: 'sign-in' }"
+                :class="{ 'active': $route.name === 'sign-in' }"
+                class="button width-100"
+            >
+                {{ $t("signInBtn") }}
+            </router-link>
         </div>
     </div>
 </template>

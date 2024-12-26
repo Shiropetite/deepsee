@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import jobCard from 'src/components/job-card-component.vue';
 import seaShapeComponent from 'src/components/sea-shape-component.vue';
-import { getJobById, getJobsByFilters } from 'src/services/job-service';
-import { GetJobByIdResponse, GetJobsByFiltersResponse, getJobsByFiltersKey, SearchJobsFilter } from 'src/services/job-type';
+import { getJobById, getJobsByFilters } from 'src/services/job/job-service';
+import { GetJobByIdResponse, GetJobsByFiltersResponse, getJobsByFiltersKey, SearchJobsFilter } from 'src/services/job/job-type';
 import { onMounted, ref, Ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 

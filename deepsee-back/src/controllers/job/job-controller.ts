@@ -4,7 +4,7 @@ import {
     fetchCompanyAdvantages,
     fetchCompanyById,
     fetchCompanyLogo,
-} from '../repositories/company/company-repository';
+} from '../../repositories/company/company-repository';
 import {
     countFetchedJobsByFilters,
     fetchJobById,
@@ -13,7 +13,7 @@ import {
     getJobRecruitmentSteps,
     getJobSoftSkills,
     getJobTeamMembers,
-} from '../repositories/job/job-repository';
+} from '../../repositories/job/job-repository';
 
 import { getJobByIdResponse, getJobsByFilterQuery, getJobsByFilterResponse } from './job-types';
 

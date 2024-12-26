@@ -1,4 +1,4 @@
-import { getJobsByFilterQuery } from '../../controllers/job-types';
+import { getJobsByFilterQuery } from '../../controllers/job/job-types';
 import { client } from '../../database';
 import { Job, JobDB, JobRecruitmentStep, JobTeamMember } from '../../models/job-model';
 

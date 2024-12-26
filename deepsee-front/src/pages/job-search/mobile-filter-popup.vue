@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SearchJobsFilter } from 'src/services/job-type';
+import { SearchJobsFilter } from 'src/services/job/job-type';
 
 import { contractTypesOptions, minSalaryOptions } from '.';
 

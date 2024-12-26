@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 
 import { connectToDatabase } from './database';
+import authRouter from './routers/auth-router';
 import jobRouter from './routers/job-router';
 
 dotenv.config();
@@ -13,6 +14,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+app.use(express.json());
 
 app.listen(port, async () => {
     await connectToDatabase();
@@ -24,5 +26,6 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/jobs', jobRouter);
+app.use('/api/auth', authRouter);
 
 app.use('/api/files', express.static(path.join(__dirname, '../files')));

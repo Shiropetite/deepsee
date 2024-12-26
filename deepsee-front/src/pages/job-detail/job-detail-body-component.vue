@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { GetJobByIdResponse } from 'src/services/job-type';
+import { GetJobByIdResponse } from 'src/services/job/job-type';
 import { formatSalary } from 'src/utils/salary-utils';
 import { formatTimeElapsedSince } from 'src/utils/time-utils';
 import { ref, watch } from 'vue';

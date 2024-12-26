@@ -5,6 +5,11 @@ const routes: RouteRecordRaw[] = [
 
         children: [
             {
+                component: () => import('../pages/account-page.vue'),
+                name: 'account',
+                path: '/account',
+            },
+            {
                 component: () => import('../pages/job-search/job-search-page.vue'),
                 name: 'search',
                 path: '/',
@@ -36,6 +41,23 @@ const routes: RouteRecordRaw[] = [
             },
         ],
         component: () => import('../layouts/main-layout.vue'),
+        path: '/',
+    },
+    {
+
+        children: [
+            {
+                component: () => import('../pages/sign-in-page.vue'),
+                name: 'sign-in',
+                path: '/sign-in',
+            },
+            {
+                component: () => import('../pages/sign-up-page.vue'),
+                name: 'sign-up',
+                path: '/sign-up',
+            },
+        ],
+        component: () => import('../layouts/auth-layout.vue'),
         path: '/',
     },
     {

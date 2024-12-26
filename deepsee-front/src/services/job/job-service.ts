@@ -1,4 +1,4 @@
-import api from '../config/axios';
+import api from '../../config/axios';
 
 import { GetJobByIdResponse, GetJobsByFiltersResponse, SearchJobsFilter } from './job-type';
 

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import { useAuthStore } from 'src/store/auth-store';
 
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -29,16 +31,42 @@
             </button>
         </div>
 
-        <div class="header row align-center gap-8">
+        <div
+            v-if="authStore.token"
+            class="header row align-center gap-8"
+        >
             <button class="button">
-                {{ $t("signUp") }}
+                {{ $t('applications') }}
             </button>
+
+            <router-link
+                :to="{ name: 'account' }"
+                class="button primary border row align-center gap-8"
+            >
+                <div class="avatar" />
+                <div>{{ authStore.user.firstName }}</div>
+            </router-link>
+        </div>
+
+        <div
+            v-else
+            class="header row align-center gap-8"
+        >
+            <router-link
+                class="button"
+                :to="{ name: 'sign-up' }"
+            >
+                {{ $t("signUp") }}
+            </router-link>
 
             <div class="separator" />
 
-            <button class="button primary">
+            <router-link
+                class="button primary"
+                :to="{ name: 'sign-in' }"
+            >
                 {{ $t("signIn") }}
-            </button>
+            </router-link>
         </div>
     </div>
 </template>
@@ -70,5 +98,18 @@
 
 .button.logo {
     padding: 3px 12px 3px 3px;
+}
+
+.button:has(.avatar) {
+    padding: 6px 12px 6px 6px;
+}
+
+.button .avatar {
+    border-radius: 100%;
+    height: 28px;
+    width: 28px;
+    border: solid 1px var(--primary);
+    background-color: var(--primary);
+    object-fit: cover;
 }
 </style>
