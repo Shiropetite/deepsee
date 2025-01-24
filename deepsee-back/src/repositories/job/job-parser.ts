@@ -15,7 +15,7 @@ import {
  * @returns Job
  */
 export const parseJob = (
-    { queryResult }: { queryResult: JobDB & { date_range?: string } }
+    { queryResult }: { queryResult: JobDB & { date_range?: string } },
 ): Job & { dateRange?: string } => ({
     __id: queryResult.id,
     _companyId: queryResult.company_id,
@@ -53,7 +53,7 @@ export const parseJobSoftSkills = ({ queryResult }: { queryResult: JobSoftSkillD
  * @returns JobRecruitmentStep
  */
 export const parseJobRecruitmentStep = (
-    { queryResult }: { queryResult: JobRecruitmentStepDB }
+    { queryResult }: { queryResult: JobRecruitmentStepDB },
 ): JobRecruitmentStep => ({
     name: queryResult.name,
     timeInMinute: queryResult.time_in_minute,

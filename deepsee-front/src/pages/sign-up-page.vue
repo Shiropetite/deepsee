@@ -38,7 +38,7 @@ const signUp = async () => {
             lastName: lastName.value,
             password: password.value,
         });
-    } catch (error) {
+    } catch {
         showAlert({
             duration: 5000,
             message: t('error.user-already-exists'),

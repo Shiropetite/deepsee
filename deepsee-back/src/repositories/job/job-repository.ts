@@ -21,7 +21,7 @@ export const fetchJobsByFilters = async (
         limit: number,
         page: number,
         searchFilters: getJobsByFilterQuery,
-    }
+    },
 ): Promise<Job[]> => {
     const queryList = [`
         SELECT
@@ -89,7 +89,7 @@ export const fetchJobsByFilters = async (
  * @returns Les offres d'emplois en BDD
  */
 export const countFetchedJobsByFilters = async (
-    { searchFilters }: { searchFilters: getJobsByFilterQuery }
+    { searchFilters }: { searchFilters: getJobsByFilterQuery },
 ): Promise<number> => {
     const queryList = [`
         SELECT COUNT(*) as total

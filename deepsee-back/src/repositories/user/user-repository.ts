@@ -25,7 +25,7 @@ export const saveUser = async ({ user }: { user: SignUpBody }): Promise<User> =>
             user.lastName,
             user.password,
             user.type,
-        ]
+        ],
     );
 
     return parseUser({ queryResult: userDB.rows[0] });

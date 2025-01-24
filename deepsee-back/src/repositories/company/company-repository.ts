@@ -9,7 +9,7 @@ import { parseCompany, parseCompanyAdvantages } from './company-parser';
  * @returns L'entreprise en BDD
  */
 export const fetchCompanyById = async (
-    { companyId }: { companyId: number }
+    { companyId }: { companyId: number },
 ): Promise<Company | undefined> => {
     const queryResult = (await client.query('SELECT * FROM company WHERE id = $1', [companyId])).rows[0];
 
@@ -22,7 +22,7 @@ export const fetchCompanyById = async (
  * @returns Les avantages de l'entreprise en BDD
  */
 export const fetchCompanyAdvantages = async (
-    { companyId }: { companyId: number }
+    { companyId }: { companyId: number },
 ): Promise<string[]> => {
     const queryResult = await client.query(
         'SELECT * FROM company_avantage WHERE company_id = $1',

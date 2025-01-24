@@ -20,5 +20,5 @@ export const parseCompany = ({ queryResult }: { queryResult: CompanyDB }): Compa
  * @returns string
  */
 export const parseCompanyAdvantages = (
-    { queryResult }: { queryResult: CompanyAdvantageDB }
+    { queryResult }: { queryResult: CompanyAdvantageDB },
 ): string => queryResult.name;
