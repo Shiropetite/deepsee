@@ -15,7 +15,9 @@ const emit = defineEmits<{
 
 const errorMessage = ref<string | null>(null);
 
-const validate = (value: string): boolean => {
+const validate = (
+    { displayError = true, value }: { displayError?: boolean, value: string },
+): boolean => {
     if (!props.rules) return true;
 
     for (const rule of props.rules) {
@@ -23,35 +25,39 @@ const validate = (value: string): boolean => {
         // Les fonctions d'erreur renvoie true si l'input est correct
         // Et une string si l'input est incorrect (qui correspond à la clé du message d'erreur)
         if (result !== true) {
-            errorMessage.value = result as string;
+            if (displayError) {
+                errorMessage.value = result as string;
+            }
             return false;
         }
     }
 
-    errorMessage.value = null;
+    if (displayError) {
+        errorMessage.value = null;
+    }
     return true;
 };
 
 const onChange = (event: Event) => {
     const newValue = (event.target as HTMLInputElement).value;
     emit('update:modelValue', newValue);
-    validate(newValue);
+    validate({ value: newValue });
 };
 
 const clear = () => {
     emit('update:modelValue', '');
-    validate('');
+    validate({ value: '' });
 };
 
 defineExpose({ validate });
 </script>
 
 <template>
-    <div class="label">
-        <label
-            v-if="label"
-            :for="label ?? placeholder"
-        >{{ label }}</label>
+    <div
+        v-if="label"
+        class="label"
+    >
+        <label :for="label ?? placeholder">{{ label }}</label>
     </div>
 
     <div
@@ -102,6 +108,7 @@ defineExpose({ validate });
 }
 
 .text-input.error {
+    width: 100%;
     box-sizing: border-box;
     border: solid 2px var(--red);
 }

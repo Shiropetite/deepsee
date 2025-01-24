@@ -1,6 +1,5 @@
 import api from '../../config/axios';
-
-import { useAuthStore } from './../../store/auth-store';
+import { useAuthStore } from '../../stores/auth-store';
 
 export const getUser = async (): Promise<void> => {
     const response = await api.get('/auth/identify');

@@ -1,10 +1,13 @@
 <script lang="ts" setup>
+import { showAlert } from 'src/components/alert/alert-composable';
 import { postSignIn } from 'src/services/auth/auth-service';
 import { isRequired } from 'src/utils/input-rules-utils';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const { t } = useI18n();
 
 const email = ref('');
 const password = ref('');
@@ -12,15 +15,29 @@ const password = ref('');
 const emailRef = ref();
 const passwordRef = ref();
 
+const isFormValid = (): boolean => {
+    return !!emailRef.value?.validate({ displayError: true, value: email.value })
+        && !!passwordRef.value?.validate({ displayError: true, value: password.value });
+};
+
 const signIn = async () => {
-    if (!emailRef.value?.validate(email.value) || !passwordRef.value?.validate(password.value)) {
+    if (!isFormValid()) {
         return;
     }
 
-    await postSignIn({
-        email: email.value,
-        password: password.value,
-    });
+    try {
+        await postSignIn({
+            email: email.value,
+            password: password.value,
+        });
+    } catch (error) {
+        showAlert({
+            duration: 5000,
+            message: t('error.invalid-credential'),
+            type: 'error',
+        });
+        return;
+    }
 
     router.push('/');
 };

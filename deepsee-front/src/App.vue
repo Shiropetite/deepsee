@@ -2,8 +2,9 @@
 import { onMounted, ref } from 'vue';
 import { RouterView } from 'vue-router';
 
+import alertComponent from './components/alert/alert-component.vue';
 import { getUser } from './services/auth/auth-service';
-import { useAuthStore } from './store/auth-store';
+import { useAuthStore } from './stores/auth-store';
 
 const authStore = useAuthStore();
 
@@ -21,5 +22,6 @@ onMounted(async () => {
 </script>
 
 <template>
+    <alert-component />
     <router-view v-if="!isLoading" />
 </template>

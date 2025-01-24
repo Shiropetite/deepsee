@@ -1,5 +1,7 @@
 {
     "error": {
-        "input-required": "Ce champ est obligatoire"
+        "input-required": "Ce champ est obligatoire",
+        "invalid-credential": "Les identifiants sont incorrects",
+        "user-already-exists": "Un utilisateur avec cet email existe déjà"
     }
 }

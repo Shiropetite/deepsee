@@ -1,10 +1,13 @@
 <script lang="ts" setup>
+import { showAlert } from 'src/components/alert/alert-composable';
 import { postSignUp } from 'src/services/auth/auth-service';
 import { isRequired } from 'src/utils/input-rules-utils';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const { t } = useI18n();
 
 const firstName = ref('');
 const lastName = ref('');
@@ -16,22 +19,33 @@ const lastNameRef = ref();
 const emailRef = ref();
 const passwordRef = ref();
 
+const isFormValid = (): boolean => {
+    return !!firstNameRef.value?.validate({ value: firstName.value }) &&
+        !!lastNameRef.value?.validate({ value: lastName.value }) &&
+        !!emailRef.value?.validate({ value: email.value }) &&
+        !!passwordRef.value?.validate({ value: password.value });
+};
+
 const signUp = async () => {
-    if (
-        !firstNameRef.value.validate(firstName.value) ||
-        !lastNameRef.value.validate(lastName.value) ||
-        !emailRef.value.validate(email.value) ||
-        !passwordRef.value.validate(password.value)
-    ) {
+    if (!isFormValid()) {
         return;
     }
 
-    await postSignUp({
-        email: email.value,
-        firstName: firstName.value,
-        lastName: lastName.value,
-        password: password.value,
-    });
+    try {
+        await postSignUp({
+            email: email.value,
+            firstName: firstName.value,
+            lastName: lastName.value,
+            password: password.value,
+        });
+    } catch (error) {
+        showAlert({
+            duration: 5000,
+            message: t('error.user-already-exists'),
+            type: 'error',
+        });
+        return;
+    }
 
     await router.push('/');
 };

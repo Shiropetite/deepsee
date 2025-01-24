@@ -59,6 +59,12 @@
     background-color: #0098b6;
 }
 
+.button.primary:disabled {
+    cursor: not-allowed;
+    background-color: var(--grey);
+    border-color: var(--grey);
+}
+
 .button.primary.border {
     background-color: white;
     border: 2px solid var(--primary);
@@ -78,6 +84,17 @@
 
 .button.secondary:hover {
     background-color: #061432;
+}
+
+// Background accent
+.button.accent-1 {
+    background-color: var(--accent-1);
+    border: 2px solid var(--accent-1);
+    color: white;
+}
+
+.button.accent-1:hover {
+    background-color: #c61068;
 }
 
 .button.round {
