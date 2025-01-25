@@ -12,9 +12,16 @@ const isLoading = ref(true);
 
 onMounted(async () => {
     const token = localStorage.getItem('token');
+    // Si utilisateur est connecté, on l'identifie
     if (token) {
         authStore.setToken(token);
-        await getUser();
+        try {
+            await getUser();
+        }
+        catch {
+            // Si le token a expiré, on le supprime
+            authStore.signOut();
+        }
     }
     isLoading.value = false;
 });
