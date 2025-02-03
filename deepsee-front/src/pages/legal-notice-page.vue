@@ -14,27 +14,27 @@ const getHostUrl = () => {
 <template>
     <div class="page column gap-28">
         <h1>
-            {{ $t('legalNotice') }}
+            {{ t('legalNotice') }}
         </h1>
 
         <div>
             <h2 class="mb-12">
-                {{ $t("editor") }}
+                {{ t("editor") }}
             </h2>
 
             <div class="column gap-2">
                 <div>
-                    {{ $t("legalNoticePage.owner") }}
+                    {{ t("legalNoticePage.owner") }}
                 </div>
                 <div>
-                    {{ $t("legalNoticePage.contact", { email: contact.email }) }}
+                    {{ t("legalNoticePage.contact", { email: contact.email }) }}
                 </div>
             </div>
         </div>
 
         <div>
             <h2 class="mb-12">
-                {{ $t("host") }}
+                {{ t("host") }}
             </h2>
 
             <div class="column gap-2">
@@ -42,10 +42,10 @@ const getHostUrl = () => {
                     v-html="getHostUrl()"
                 />
                 <div>
-                    {{ $t("legalNoticePage.hostInfo") }}
+                    {{ t("legalNoticePage.hostInfo") }}
                 </div>
                 <div>
-                    {{ $t("legalNoticePage.hostAdress") }}
+                    {{ t("legalNoticePage.hostAdress") }}
                 </div>
             </div>
         </div>

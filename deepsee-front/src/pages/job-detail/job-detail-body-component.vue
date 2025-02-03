@@ -1,27 +1,56 @@
 <script lang="ts" setup>
+import confirmationPopup from 'src/components/confirmation-popup.vue';
+import { postJobToFavorite, deleteJobToFavorite } from 'src/services/job/job-service';
 import { GetJobByIdResponse } from 'src/services/job/job-type';
+import { useAuthStore } from 'src/stores/auth-store';
 import { formatSalary } from 'src/utils/salary-utils';
 import { formatTimeElapsedSince } from 'src/utils/time-utils';
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
+const authStore = useAuthStore();
+const { t } = useI18n();
 const route = useRoute();
 
+const isPopupConfirmationOpen = ref(false);
+const isFavorite = ref(false);
 const companyDescriptionSeeMore = ref(false);
 const jobDescriptionSeeMore = ref(false);
 const expectationDescriptionSeeMore = ref(false);
 
-defineProps<{
+const props = defineProps<{
     goToSearch: () => void;
     isLoading: boolean
     job: GetJobByIdResponse | null;
 }>();
+
+watch(() => props.job, () => {
+    isFavorite.value = props.job?.isFavorite ?? false;
+});
 
 watch(() => route.fullPath, async () => {
     companyDescriptionSeeMore.value = false;
     jobDescriptionSeeMore.value = false;
     expectationDescriptionSeeMore.value = false;
 });
+
+const toggleFavorite = async () => {
+    if (authStore.user === null) {
+        isPopupConfirmationOpen.value = true;
+        return;
+    }
+
+    const newFavoriteStatus = !isFavorite.value;
+    if (newFavoriteStatus) {
+        await postJobToFavorite({ jobId: props.job.__id });
+    }
+    else {
+        await deleteJobToFavorite({ jobId: props.job.__id });
+    }
+
+    isFavorite.value = newFavoriteStatus;
+};
 </script>
 
 <template>
@@ -41,7 +70,7 @@ watch(() => route.fullPath, async () => {
                 <div class="row justify-between align-center gap-8 mb-12">
                     <button
                         class="button primary icon round row gap-8 mobile"
-                        :aria-label="$t('goBack')"
+                        :aria-label="t('goBack')"
                         @click="goToSearch"
                     >
                         <img
@@ -85,15 +114,28 @@ watch(() => route.fullPath, async () => {
                             alt="send-icon"
                             src="/icons/send-icon.png"
                         >
-                        <div>{{ $t("apply") }}</div>
+                        <div>{{ t("apply") }}</div>
                     </button>
 
-                    <button class="button secondary round label-icon row gap-8">
+                    <button
+                        class="button round label-icon row gap-8"
+                        :class="{
+                            secondary: !isFavorite,
+                            'accent-1': isFavorite
+                        }"
+                        @click="toggleFavorite"
+                    >
                         <img
+                            v-if="isFavorite"
                             alt="favorite-icon"
-                            src="/icons/favorite-icon.png"
+                            src="/icons/full-favorite-icon.png"
                         >
-                        <div>{{ $t("favorite") }}</div>
+                        <img
+                            v-else
+                            alt="favorite-icon"
+                            src="/icons/line-favorite-icon.png"
+                        >
+                        <div>{{ t("favorite") }}</div>
                     </button>
                 </div>
             </div>
@@ -102,7 +144,7 @@ watch(() => route.fullPath, async () => {
         <div class="detail-body column gap-28">
             <div>
                 <div class="title mb-6">
-                    {{ $t("summary") }}
+                    {{ t("summary") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -119,11 +161,11 @@ watch(() => route.fullPath, async () => {
                     </div>
 
                     <div class="chip border grey">
-                        {{ $t("dayOfRemoteWork", { count: job.dayOfRemoteWork }) }}
+                        {{ t("dayOfRemoteWork", { count: job.dayOfRemoteWork }) }}
                     </div>
 
                     <div class="chip border grey">
-                        {{ $t("yearOfExperience", { count: job.experienceMinInYear }) }}
+                        {{ t("yearOfExperience", { count: job.experienceMinInYear }) }}
                     </div>
 
                     <div class="chip border grey">
@@ -134,7 +176,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("companyDescription") }}
+                    {{ t("companyDescription") }}
                 </div>
 
                 <div
@@ -150,7 +192,7 @@ watch(() => route.fullPath, async () => {
                     </div>
 
                     <div class="chip border grey">
-                        {{ $t("nbEmployee", { count: job.companyNumberOfEmployees }) }}
+                        {{ t("nbEmployee", { count: job.companyNumberOfEmployees }) }}
                     </div>
                 </div>
 
@@ -160,7 +202,7 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="companyDescriptionSeeMore = true"
                     >
-                        {{ $t("seeMore") }}
+                        {{ t("seeMore") }}
                     </button>
 
                     <button
@@ -168,14 +210,14 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="companyDescriptionSeeMore = false"
                     >
-                        {{ $t("seeLess") }}
+                        {{ t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("jobDescription") }}
+                    {{ t("jobDescription") }}
                 </div>
 
                 <div
@@ -191,7 +233,7 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="jobDescriptionSeeMore = true"
                     >
-                        {{ $t("seeMore") }}
+                        {{ t("seeMore") }}
                     </button>
 
                     <button
@@ -199,14 +241,14 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="jobDescriptionSeeMore = false"
                     >
-                        {{ $t("seeLess") }}
+                        {{ t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-6">
-                    {{ $t("skills") }}
+                    {{ t("skills") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -222,7 +264,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("expectationsDescription") }}
+                    {{ t("expectationsDescription") }}
                 </div>
 
                 <div
@@ -238,7 +280,7 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="expectationDescriptionSeeMore = true"
                     >
-                        {{ $t("seeMore") }}
+                        {{ t("seeMore") }}
                     </button>
 
                     <button
@@ -246,14 +288,14 @@ watch(() => route.fullPath, async () => {
                         class="button secondary small"
                         @click="expectationDescriptionSeeMore = false"
                     >
-                        {{ $t("seeLess") }}
+                        {{ t("seeLess") }}
                     </button>
                 </div>
             </div>
 
             <div>
                 <div class="title mb-6">
-                    {{ $t("softSkills") }}
+                    {{ t("softSkills") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -269,7 +311,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("recruitmentSteps") }}
+                    {{ t("recruitmentSteps") }}
                 </div>
 
                 <div class="column gap-8">
@@ -284,7 +326,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("teamDescription") }}
+                    {{ t("teamDescription") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -308,7 +350,7 @@ watch(() => route.fullPath, async () => {
 
             <div>
                 <div class="title mb-8">
-                    {{ $t("companyAdvantages") }}
+                    {{ t("companyAdvantages") }}
                 </div>
 
                 <div class="row wrap gap-8">
@@ -323,6 +365,16 @@ watch(() => route.fullPath, async () => {
             </div>
         </div>
     </div>
+
+    <popup-component
+        animation="fade"
+        :title="t('signInRequired')"
+        :is-open="isPopupConfirmationOpen"
+        :max-width="800"
+        @close="isPopupConfirmationOpen = false"
+    >
+        <confirmation-popup />
+    </popup-component>
 </template>
 
 <style lang="scss" scoped>

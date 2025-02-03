@@ -120,5 +120,7 @@
     "thisMonth": "Ce mois-ci",
     "older": "Ces 3 derniers mois",
     "today": "Aujourd'hui",
-    "yearOfExperience": "{ count } an d'expérience | { count } ans d'expérience"
+    "yearOfExperience": "{ count } an d'expérience | { count } ans d'expérience",
+    "signInRequired": "Connexion requise",
+    "signInRequiredDescription": "Connectez-vous pour accéder à cette fonctionnalité."
 }

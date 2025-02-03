@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
     label?: string;
@@ -12,6 +13,8 @@ const props = defineProps<{
 const emit = defineEmits<{
     (e: 'update:modelValue', val: string): void;
 }>();
+
+const { t } = useI18n();
 
 const errorMessage = ref<string | null>(null);
 
@@ -75,7 +78,7 @@ defineExpose({ validate });
         <button
             v-if="modelValue.length > 0"
             class="button border round icon small"
-            :aria-label="$t('clear')"
+            :aria-label="t('clear')"
             @click="clear()"
         >
             <img
@@ -90,7 +93,7 @@ defineExpose({ validate });
         v-if="errorMessage"
         class="error"
     >
-        {{ $t(errorMessage) }}
+        {{ t(errorMessage) }}
     </div>
 </template>
 

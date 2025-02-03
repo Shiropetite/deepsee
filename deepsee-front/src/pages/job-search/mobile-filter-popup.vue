@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { SearchJobsFilter } from 'src/services/job/job-type';
+import { useI18n } from 'vue-i18n';
 
 import { contractTypesOptions, minSalaryOptions } from '.';
 
@@ -10,19 +11,21 @@ defineProps<{
 const emit = defineEmits<{
     (e: 'update:modelValue', val: SearchJobsFilter): void;
 }>();
+
+const { t } = useI18n();
 </script>
 
 <template>
     <div class="popup-content column gap-18">
         <text-input
             :model-value="modelValue.jobTitle"
-            :placeholder="$t('jobSearchPage.jobTitle')"
+            :placeholder="t('jobSearchPage.jobTitle')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, jobTitle: $event })"
         />
 
         <text-input
             :model-value="modelValue.city"
-            :placeholder="$t('jobSearchPage.city')"
+            :placeholder="t('jobSearchPage.city')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, city: $event })"
         />
 
@@ -34,13 +37,13 @@ const emit = defineEmits<{
 
         <text-input
             :model-value="modelValue.companyName"
-            :placeholder="$t('jobSearchPage.companyName')"
+            :placeholder="t('jobSearchPage.companyName')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, companyName: $event })"
         />
 
         <text-input
             :model-value="modelValue.companySector"
-            :placeholder="$t('jobSearchPage.companySector')"
+            :placeholder="t('jobSearchPage.companySector')"
             @update:model-value="($event) => emit('update:modelValue', { ...modelValue, companySector: $event })"
         />
 

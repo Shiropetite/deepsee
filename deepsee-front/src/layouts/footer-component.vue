@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>
+
 <template>
     <div class="laptop footer row justify-between">
         <img
@@ -10,28 +16,28 @@
                 class="button secondary"
                 :to="{ name: 'legal-notice' }"
             >
-                {{ $t("legalNotice") }}
+                {{ t("legalNotice") }}
             </router-link>
 
             <router-link
                 class="button secondary"
                 :to="{ name: 'privacy-policy' }"
             >
-                {{ $t("privacyPolicy") }}
+                {{ t("privacyPolicy") }}
             </router-link>
 
             <router-link
                 class="button secondary"
                 :to="{ name: 'term-of-use' }"
             >
-                {{ $t("termOfUse") }}
+                {{ t("termOfUse") }}
             </router-link>
 
             <router-link
                 class="button secondary"
                 :to="{ name: 'contact' }"
             >
-                {{ $t("contact") }}
+                {{ t("contact") }}
             </router-link>
         </div>
     </div>
@@ -42,28 +48,28 @@
                 class="button secondary small"
                 :to="{ name: 'legal-notice' }"
             >
-                {{ $t("legalNotice") }}
+                {{ t("legalNotice") }}
             </router-link>
 
             <router-link
                 class="button secondary small"
                 :to="{ name: 'privacy-policy' }"
             >
-                {{ $t("privacyPolicy") }}
+                {{ t("privacyPolicy") }}
             </router-link>
 
             <router-link
                 class="button secondary small"
                 :to="{ name: 'term-of-use' }"
             >
-                {{ $t("termOfUse") }}
+                {{ t("termOfUse") }}
             </router-link>
 
             <router-link
                 class="button secondary small"
                 :to="{ name: 'contact' }"
             >
-                {{ $t("contact") }}
+                {{ t("contact") }}
             </router-link>
         </div>
 

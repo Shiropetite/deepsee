@@ -1,8 +1,9 @@
 import { getJobsByFilterQuery } from '../../controllers/job/job-types';
 import { client } from '../../database';
-import { Job, JobDB, JobRecruitmentStep, JobTeamMember } from '../../models/job-model';
+import { FavoriteJob, Job, JobDB, JobRecruitmentStep, JobTeamMember } from '../../models/job-model';
 
 import {
+    parseFavoriteJob,
     parseJob, parseJobHardSkills, parseJobRecruitmentStep, parseJobSoftSkills, parseJobTeamMember } from './job-parser';
 
 /**
@@ -152,7 +153,7 @@ export const fetchJobById = async ({ jobId }: { jobId: number }): Promise<Job | 
  * @param jobId - Identifiant de l'offre d'emploi
  * @returns Les compétences techniques de l'offre d'emploi en BDD
  */
-export const getJobHardSkills = async ({ jobId }: { jobId: number }): Promise<string[]> => {
+export const fetchJobHardSkills = async ({ jobId }: { jobId: number }): Promise<string[]> => {
     const queryResult = await client.query(
         'SELECT * FROM job_hard_skill WHERE job_offer_id = $1',
         [jobId],
@@ -166,7 +167,7 @@ export const getJobHardSkills = async ({ jobId }: { jobId: number }): Promise<st
  * @param jobId - Identifiant de l'offre d'emploi
  * @returns Les compétences comportementales de l'offre d'emploi en BDD
  */
-export const getJobSoftSkills = async ({ jobId }: { jobId: number }): Promise<string[]> => {
+export const fetchJobSoftSkills = async ({ jobId }: { jobId: number }): Promise<string[]> => {
     const queryResult = await client.query(
         'SELECT * FROM job_soft_skill WHERE job_offer_id = $1',
         [jobId],
@@ -180,7 +181,7 @@ export const getJobSoftSkills = async ({ jobId }: { jobId: number }): Promise<st
  * @param jobId - Identifiant de l'offre d'emploi
  * @returns Les compétences comportementales de l'offre d'emploi en BDD
  */
-export const getJobRecruitmentSteps = async ({ jobId }: { jobId: number }): Promise<JobRecruitmentStep[]> => {
+export const fetchJobRecruitmentSteps = async ({ jobId }: { jobId: number }): Promise<JobRecruitmentStep[]> => {
     const queryResult = await client.query(
         'SELECT * FROM job_recruitment_step WHERE job_offer_id = $1',
         [jobId],
@@ -194,11 +195,67 @@ export const getJobRecruitmentSteps = async ({ jobId }: { jobId: number }): Prom
  * @param jobId - Identifiant de l'offre d'emploi
  * @returns Les membres de l'équipe de l'offre d'emploi en BDD
  */
-export const getJobTeamMembers = async ({ jobId }: { jobId: number }): Promise<JobTeamMember[]> => {
+export const fetchJobTeamMembers = async ({ jobId }: { jobId: number }): Promise<JobTeamMember[]> => {
     const queryResult = await client.query(
         'SELECT * FROM job_team_member WHERE job_offer_id = $1',
         [jobId],
     );
 
     return queryResult.rows.map((row) => parseJobTeamMember({ queryResult: row }));
+};
+
+export const fetchFavoriteJobsFromUser = async ({ userId }: { userId: number }): Promise<FavoriteJob[]> => {
+    const queryResult = await client.query(
+        'SELECT * FROM favorite_job WHERE user_id = $1',
+        [userId],
+    );
+
+    return queryResult.rows.map((row) => parseFavoriteJob({ queryResult: row }));
+};
+
+/**
+ * Récupère le favoris d'un utilisateur pour une offre d'emploi si elle existe.
+ * @param jobId - Identifiant de l'offre d'emploi
+ * @param userId - Identifiant de l'utilisateur
+ * @returns Le favoris
+ */
+export const fetchFavoriteJob = async (
+    { jobId, userId }: { jobId: number, userId: number },
+): Promise<FavoriteJob | undefined> => {
+    const queryResult = await client.query(
+        'SELECT * FROM favorite_job WHERE job_id = $1 AND user_id = $2',
+        [jobId, userId],
+    );
+
+    return queryResult.rows[0] ? parseFavoriteJob({ queryResult: queryResult.rows[0] }) : undefined;
+};
+
+/**
+ * Ajouter un job dans la liste des favoris d'un utilisateur
+ * @param jobId - Identifiant de l'offre d'emploi
+ * @param userId - Identifiant de l'utilisateur
+ * @returns Le favoris ajouté
+ */
+export const createFavoriteJob = async ({ jobId, userId }: { jobId: number, userId: number }) => {
+    const queryResult = await client.query(
+        'INSERT INTO favorite_job (job_id, user_id) VALUES ($1, $2) RETURNING *',
+        [jobId, userId],
+    );
+
+    return parseFavoriteJob({ queryResult: queryResult.rows[0] });
+};
+
+/**
+ * Enlever un job dans la liste des favoris d'un utilisateur
+ * @param jobId - Identifiant de l'offre d'emploi
+ * @param userId - Identifiant de l'utilisateur
+ * @returns Le favoris supprimé
+ */
+export const deleteFavoriteJob = async ({ jobId, userId }: { jobId: number, userId: number }) => {
+    const queryResult = await client.query(
+        'DELETE FROM favorite_job WHERE job_id = $1 AND user_id = $2 RETURNING *',
+        [jobId, userId],
+    );
+
+    return parseFavoriteJob({ queryResult: queryResult.rows[0] });
 };

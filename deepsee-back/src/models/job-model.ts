@@ -17,6 +17,7 @@ export type Job = {
     softSkills?: string[];
     teamMembers?: JobTeamMember[];
     title: string;
+    isFavorite?: boolean;
 };
 
 export type JobRecruitmentStep = {
@@ -29,6 +30,12 @@ export type JobTeamMember = {
     lastName: string;
     role: string;
 };
+
+export type FavoriteJob = {
+    _jobId: number;
+    _userId: number;
+    createdAt: string;
+}
 // #endregion
 
 // #region --- Database models
@@ -71,4 +78,10 @@ export type JobTeamMemberDB = {
     logo?: string;
     role: string;
 };
+
+export type FavoriteJobDB = {
+    created_at: string;
+    job_id: number;
+    user_id: number;
+}
 // #endregion

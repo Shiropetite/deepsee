@@ -1,100 +1,103 @@
 <script lang="ts" setup>
 import contact from 'src/config/contact';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
     <div class="page column gap-28">
         <h1>
-            {{ $t('termOfUsePage.title') }}
+            {{ t('termOfUsePage.title') }}
         </h1>
 
         <div>
             <h2 class="mb-18">
-                {{ $t("introduction") }}
+                {{ t("introduction") }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.introduction') }}
+                {{ t('termOfUsePage.introduction') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.siteAccessTitle') }}
+                {{ t('termOfUsePage.siteAccessTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.siteAccess') }}
+                {{ t('termOfUsePage.siteAccess') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.intellectualPropertyTitle') }}
+                {{ t('termOfUsePage.intellectualPropertyTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.intellectualProperty') }}
+                {{ t('termOfUsePage.intellectualProperty') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.siteUseTitle') }}
+                {{ t('termOfUsePage.siteUseTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.siteUse') }}
+                {{ t('termOfUsePage.siteUse') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.liabilityTitle') }}
+                {{ t('termOfUsePage.liabilityTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.liability') }}
+                {{ t('termOfUsePage.liability') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.externalLinksTitle') }}
+                {{ t('termOfUsePage.externalLinksTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.externalLinks') }}
+                {{ t('termOfUsePage.externalLinks') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.amendmentsTitle') }}
+                {{ t('termOfUsePage.amendmentsTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.amendments') }}
+                {{ t('termOfUsePage.amendments') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('termOfUsePage.lawTitle') }}
+                {{ t('termOfUsePage.lawTitle') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.law') }}
+                {{ t('termOfUsePage.law') }}
             </div>
         </div>
 
         <div>
             <h2 class="mb-18">
-                {{ $t('contact') }}
+                {{ t('contact') }}
             </h2>
 
             <div>
-                {{ $t('termOfUsePage.contact', { email: contact.email }) }}
+                {{ t('termOfUsePage.contact', { email: contact.email }) }}
             </div>
         </div>
     </div>

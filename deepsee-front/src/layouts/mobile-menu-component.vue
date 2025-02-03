@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { useAuthStore } from 'src/stores/auth-store';
+import { useI18n } from 'vue-i18n';
 
 const authStore = useAuthStore();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -12,11 +14,11 @@ const authStore = useAuthStore();
                 :class="{ 'active': $route.name === 'search' }"
                 class="button width-100"
             >
-                {{ $t("job") }}
+                {{ t("job") }}
             </router-link>
 
             <button class="button width-100">
-                {{ $t("company") }}
+                {{ t("company") }}
             </button>
 
             <router-link
@@ -25,7 +27,7 @@ const authStore = useAuthStore();
                 :class="{ 'active': $route.name === 'account' }"
                 class="button width-100"
             >
-                {{ $t("account") }}
+                {{ t("account") }}
             </router-link>
 
             <router-link
@@ -34,7 +36,7 @@ const authStore = useAuthStore();
                 :class="{ 'active': $route.name === 'sign-in' }"
                 class="button width-100"
             >
-                {{ $t("signInBtn") }}
+                {{ t("signInBtn") }}
             </router-link>
         </div>
     </div>

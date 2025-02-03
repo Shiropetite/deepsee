@@ -2,6 +2,9 @@
 import seaShapeComponent from 'src/components/sea-shape-component.vue';
 import footerComponent from 'src/layouts/footer-component.vue';
 import mobileMenu from 'src/layouts/mobile-menu-component.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -15,10 +18,10 @@ import mobileMenu from 'src/layouts/mobile-menu-component.vue';
     <div class="content column align-center gap-28">
         <div class="text-center">
             <h1 class="mb-12">
-                {{ $t('oops') }}
+                {{ t('oops') }}
             </h1>
             <div>
-                {{ $t('pageNotFound') }}
+                {{ t('pageNotFound') }}
             </div>
         </div>
 
@@ -26,7 +29,7 @@ import mobileMenu from 'src/layouts/mobile-menu-component.vue';
             class="button primary"
             to="/"
         >
-            {{ $t('backHome') }}
+            {{ t('backHome') }}
         </router-link>
     </div>
 

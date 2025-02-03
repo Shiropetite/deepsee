@@ -4,8 +4,9 @@ import { postSignUp } from 'src/services/auth/auth-service';
 import { isRequired } from 'src/utils/input-rules-utils';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 
@@ -47,6 +48,11 @@ const signUp = async () => {
         return;
     }
 
+    if (route.query.redirect) {
+        router.push(route.query.redirect as string);
+        return;
+    }
+
     await router.push('/');
 };
 </script>
@@ -54,7 +60,7 @@ const signUp = async () => {
 <template>
     <div class="column gap-28">
         <h1 class="mb-28 text-center">
-            {{ $t('signUp') }}
+            {{ t('signUp') }}
         </h1>
 
         <div class="row gap-28">
@@ -63,7 +69,7 @@ const signUp = async () => {
                     ref="firstNameRef"
                     v-model="firstName"
                     :rules="[isRequired]"
-                    :label="$t('firstName')"
+                    :label="t('firstName')"
                 />
             </div>
 
@@ -72,7 +78,7 @@ const signUp = async () => {
                     ref="lastNameRef"
                     v-model="lastName"
                     :rules="[isRequired]"
-                    :label="$t('lastName')"
+                    :label="t('lastName')"
                 />
             </div>
         </div>
@@ -82,7 +88,7 @@ const signUp = async () => {
                 ref="emailRef"
                 v-model="email"
                 :rules="[isRequired]"
-                :label="$t('email')"
+                :label="t('email')"
             />
         </div>
 
@@ -91,7 +97,7 @@ const signUp = async () => {
                 ref="passwordRef"
                 v-model="password"
                 :rules="[isRequired]"
-                :label="$t('password')"
+                :label="t('password')"
                 type="password"
             />
         </div>
@@ -101,14 +107,14 @@ const signUp = async () => {
                 class="width-100 button primary"
                 @click="signUp"
             >
-                {{ $t('signUpBtn') }}
+                {{ t('signUpBtn') }}
             </button>
 
             <router-link
                 :to="{ name: 'sign-in' }"
                 class="width-100 button border primary"
             >
-                {{ $t('signIn') }}
+                {{ t('signIn') }}
             </router-link>
         </div>
     </div>

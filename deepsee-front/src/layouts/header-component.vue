@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { useAuthStore } from 'src/stores/auth-store';
+import { useI18n } from 'vue-i18n';
 
 const authStore = useAuthStore();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -21,13 +23,13 @@ const authStore = useAuthStore();
             <div class="separator" />
 
             <button class="button active">
-                {{ $t("searchJob") }}
+                {{ t("searchJob") }}
             </button>
 
             <div class="separator" />
 
             <button class="button">
-                {{ $t("searchCompany") }}
+                {{ t("searchCompany") }}
             </button>
         </div>
 
@@ -35,9 +37,12 @@ const authStore = useAuthStore();
             v-if="authStore.token"
             class="header row align-center gap-8"
         >
-            <button class="button">
-                {{ $t('applications') }}
-            </button>
+            <router-link
+                :to="{ name: 'job-board' }"
+                class="button"
+            >
+                {{ t('applications') }}
+            </router-link>
 
             <router-link
                 :to="{ name: 'account' }"
@@ -56,7 +61,7 @@ const authStore = useAuthStore();
                 class="button"
                 :to="{ name: 'sign-up' }"
             >
-                {{ $t("signUp") }}
+                {{ t("signUp") }}
             </router-link>
 
             <div class="separator" />
@@ -65,7 +70,7 @@ const authStore = useAuthStore();
                 class="button primary"
                 :to="{ name: 'sign-in' }"
             >
-                {{ $t("signIn") }}
+                {{ t("signIn") }}
             </router-link>
         </div>
     </div>

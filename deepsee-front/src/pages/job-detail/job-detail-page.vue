@@ -4,10 +4,12 @@ import seaShapeComponent from 'src/components/sea-shape-component.vue';
 import { getJobById, getJobsByFilters } from 'src/services/job/job-service';
 import { GetJobByIdResponse, GetJobsByFiltersResponse, getJobsByFiltersKey, SearchJobsFilter } from 'src/services/job/job-type';
 import { onMounted, ref, Ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
 import jobDetailBodyComponent from './job-detail-body-component.vue';
 
+const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
 
@@ -130,21 +132,21 @@ watch(() => route.fullPath, async () => {
                 <div class="list-header">
                     <button
                         class="button primary label-icon round row gap-8"
-                        :aria-label="$t('goBack')"
+                        :aria-label="t('goBack')"
                         @click="goToSearch"
                     >
                         <img
                             alt="arrow-left-icon"
                             src="/icons/arrow-left-icon.png"
                         >
-                        <div>{{ $t('goBack') }}</div>
+                        <div>{{ t('goBack') }}</div>
                     </button>
                 </div>
 
                 <div class="list-body">
                     <div v-if="listIsLoading">
                         <h2 class="mb-18">
-                            {{ $t('today') }}
+                            {{ t('today') }}
                         </h2>
 
                         <div class="list-job">
@@ -169,7 +171,7 @@ watch(() => route.fullPath, async () => {
                                 v-if="jobs.data[label]?.length > 0"
                                 class="mb-18"
                             >
-                                {{ $t(label) }}
+                                {{ t(label) }}
                             </h2>
 
                             <div class="column gap-18">
@@ -187,10 +189,10 @@ watch(() => route.fullPath, async () => {
                             <button
                                 v-if="currentPage < jobs.maxPages"
                                 class="button primary"
-                                :aria-label="$t('getMoreJobs')"
+                                :aria-label="t('getMoreJobs')"
                                 @click="loadMoreJobs()"
                             >
-                                {{ $t("getMoreJobs") }}
+                                {{ t("getMoreJobs") }}
                             </button>
                         </div>
                     </div>

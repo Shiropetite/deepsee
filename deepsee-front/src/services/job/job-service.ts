@@ -33,3 +33,18 @@ export const getJobById = async ({ id }: { id: number }): Promise<GetJobByIdResp
     const response = await api.get(`/jobs/${id}`);
     return response.data;
 };
+
+export const getFavoriteJobs = async (): Promise<void> => {
+    const response = await api.get('/jobs/board');
+    return response.data;
+};
+
+export const postJobToFavorite = async ({ jobId }: { jobId: number }): Promise<void> => {
+    const response = await api.post('/jobs/favorite', { jobId });
+    return response.data;
+};
+
+export const deleteJobToFavorite = async ({ jobId }: { jobId: number }): Promise<void> => {
+    const response = await api.delete(`/jobs/favorite/${jobId}`);
+    return response.data;
+};

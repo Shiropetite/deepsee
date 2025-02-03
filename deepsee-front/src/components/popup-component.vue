@@ -1,15 +1,19 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   isOpen?: boolean;
   maxWidth?: number;
   title?: string;
+  animation?: 'slide' | 'fade';
 }>();
 
 const emit = defineEmits<{
     (e: 'close'): void;
 }>();
+
+const { t } = useI18n();
 
 const show = ref(false);
 const hide = ref(true);
@@ -26,7 +30,7 @@ watch(
             setTimeout(() => {
                 appear.value = false;
                 show.value = true;
-            }, 500);
+            }, 450);
         } else {
             document.body.style.overflow = 'auto';
             show.value = false;
@@ -34,7 +38,7 @@ watch(
             setTimeout(() => {
                 disapear.value = false;
                 hide.value = true;
-            }, 500);
+            }, 450);
         }
     },
 );
@@ -45,13 +49,20 @@ const closePopup = (e: Event) => {
         emit('close');
     }
 };
+
+onUnmounted(() => {
+    document.body.style.overflow = 'auto';
+});
 </script>
 
 <template>
     <div
         id="popup-container"
         class="popup-container"
-        :class="{ show, hide, appear, disapear }"
+        :class="[
+          { show, hide, appear, disapear },
+          props.animation,
+        ]"
         @click="closePopup"
     >
         <div
@@ -63,7 +74,7 @@ const closePopup = (e: Event) => {
 
                 <button
                     class="button icon small"
-                    :aria-label="$t('close')"
+                    :aria-label="t('close')"
                     @click="emit('close')"
                 >
                     <img
@@ -105,8 +116,6 @@ const closePopup = (e: Event) => {
 .popup {
   position: fixed;
   background-color: white;
-  top: 40px;
-  bottom: 40px;
   width: 100%;
   border-radius: 12px;
   z-index: 20;
@@ -122,19 +131,19 @@ const closePopup = (e: Event) => {
 
 @keyframes fade-in {
   from {
-    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
   }
   to {
-    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
   }
 }
 
 @keyframes fade-out {
   from {
-    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
   }
   to {
-    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
   }
 }
 
@@ -160,9 +169,28 @@ const closePopup = (e: Event) => {
   display: none !important;
 }
 
-.appear {
+// ---- Fade animation ----
+.appear.fade {
   animation-name: fade-in;
   animation-duration: 0.5s;
+
+  .popup {
+    animation: none; // Pas de mouvement
+  }
+}
+
+.disapear.fade {
+  animation-name: fade-out;
+  animation-duration: 0.5s;
+
+  .popup {
+    animation: none;
+  }
+}
+
+// ---- Slide animation ----
+.appear.slide {
+  animation: none;
 
   .popup {
     animation-name: slide-in;
@@ -170,9 +198,8 @@ const closePopup = (e: Event) => {
   }
 }
 
-.disapear {
-  animation-name: fade-out;
-  animation-duration: 0.5s;
+.disapear.slide {
+  animation: none;
 
   .popup {
     animation-name: slide-out;

@@ -1,4 +1,6 @@
 import {
+    FavoriteJob,
+    FavoriteJobDB,
     Job,
     JobDB,
     JobHardSkillDB,
@@ -68,4 +70,15 @@ export const parseJobTeamMember = ({ queryResult }: { queryResult: JobTeamMember
     firstName: queryResult.first_name,
     lastName: queryResult.last_name,
     role: queryResult.role,
+});
+
+/**
+ * Parse un FavoriteJobDB en FavoriteJob
+ * @param queryResult - FavoriteJobDB
+ * @returns FavoriteJob
+ */
+export const parseFavoriteJob = ({ queryResult }: { queryResult: FavoriteJobDB }): FavoriteJob => ({
+    _jobId: queryResult.job_id,
+    _userId: queryResult.user_id,
+    createdAt: queryResult.created_at,
 });

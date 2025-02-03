@@ -4,6 +4,7 @@ import fr from '../i18n/fr';
 
 const i18n = createI18n({
     fallbackLocale: 'fr',
+    legacy: false,
     locale: 'fr',
     messages: { fr },
 });

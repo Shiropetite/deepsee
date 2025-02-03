@@ -53,6 +53,7 @@ export type GetJobByIdResponse = {
   expectationDescription: string;
   experienceMinInYear: number;
   hardSkills: string[];
+  isFavorite: boolean;
   jobDescription: string;
   maxDiploma: string;
   publishedAt: string;

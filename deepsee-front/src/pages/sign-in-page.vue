@@ -4,8 +4,9 @@ import { postSignIn } from 'src/services/auth/auth-service';
 import { isRequired } from 'src/utils/input-rules-utils';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
+const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 
@@ -39,6 +40,11 @@ const signIn = async () => {
         return;
     }
 
+    if (route.query.redirect) {
+        router.push(route.query.redirect as string);
+        return;
+    }
+
     router.push('/');
 };
 </script>
@@ -46,7 +52,7 @@ const signIn = async () => {
 <template>
     <div class="column gap-28">
         <h1 class="mb-28 text-center">
-            {{ $t('signIn') }}
+            {{ t('signIn') }}
         </h1>
 
         <div>
@@ -54,7 +60,7 @@ const signIn = async () => {
                 ref="emailRef"
                 v-model="email"
                 :rules="[isRequired]"
-                :label="$t('email')"
+                :label="t('email')"
             />
         </div>
 
@@ -63,13 +69,13 @@ const signIn = async () => {
                 ref="passwordRef"
                 v-model="password"
                 :rules="[isRequired]"
-                :label="$t('password')"
+                :label="t('password')"
                 type="password"
             />
 
             <div class="mt-4 row justify-end">
                 <router-link to="/">
-                    {{ $t('forgottenPassword') }}
+                    {{ t('forgottenPassword') }}
                 </router-link>
             </div>
         </div>
@@ -79,14 +85,14 @@ const signIn = async () => {
                 class="width-100 button primary"
                 @click="signIn"
             >
-                {{ $t('signInBtn') }}
+                {{ t('signInBtn') }}
             </button>
 
             <router-link
                 :to="{ name: 'sign-up' }"
                 class="width-100 button border primary"
             >
-                {{ $t('signUp') }}
+                {{ t('signUp') }}
             </router-link>
         </div>
     </div>
