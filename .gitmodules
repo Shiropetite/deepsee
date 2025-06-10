@@ -1,0 +1,15 @@
+[submodule "deespee-front"]
+	path = deespee-front
+	url = https://github.com/Shiropetite/deepsee-front.git
+[submodule "deespee-back"]
+	path = deespee-back
+	url = https://github.com/Shiropetite/deepsee-back.git
+[submodule "deespee-infra"]
+	path = deespee-infra
+	url = https://github.com/Shiropetite/deepsee-infra.git
+[submodule "deespee-kub"]
+	path = deespee-kub
+	url = https://github.com/Shiropetite/deepsee-kub.git
+[submodule "deespee-actions"]
+	path = deespee-actions
+	url = https://github.com/Shiropetite/deepsee-actions.git
